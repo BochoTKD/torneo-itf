@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111111">
+
+    <title>Torneo ITF</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main id="app">
+        <section id="pantalla-inicio" class="pantalla activa">
+
+            <h1>Torneo ITF</h1>
+
+            <p>¿Quién eres?</p>
+
+            <div class="opciones">
+
+                <button id="btn-participante" class="boton-rol">
+                    <i data-lucide="user-round"></i>
+                    <span>Participante</span>
+                </button>
+
+                <button id="btn-profesor" class="boton-rol">
+                    <i data-lucide="users-round"></i>
+                    <span>Profesor</span>
+                </button>
+
+                <button id="btn-organizador" class="boton-rol">
+                    <i data-lucide="shield"></i>
+                    <span>Organizador</span>
+                </button>
+            </div>
+        </section>
+    </main>
+    
+    <button id="btn-tema" class="boton-tema" aria-label="Cambiar tema">
+        <i data-lucide="sun"></i>
+    </button>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

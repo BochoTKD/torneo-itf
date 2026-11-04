@@ -1,0 +1,160 @@
+
+/* =================================
+   1. CONFIGURACIÓN GENERAL
+================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: white;
+
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+        url("./assets/fondo-tatami.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* =================================
+   2. CONTENEDOR PRINCIPAL
+================================= */
+
+#app {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+/* =================================
+   3. PANTALLAS
+================================= */
+
+.pantalla {
+    display: none;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.pantalla.activa {
+    display: block;
+}
+
+/* =================================
+   4. TÍTULOS Y TEXTOS
+================================= */
+
+h1 {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    margin-bottom: 18px;
+}
+
+p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+/* =================================
+   5. BOTONES
+================================= */
+
+.opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+button {
+    padding: 16px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 12px;
+
+    background: rgba(20, 20, 20, 0.75);
+    color: white;
+
+    font-size: 1rem;
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+button:hover {
+    background: rgba(70, 70, 70, 0.9);
+    transform: translateY(-2px);
+}
+
+/* BOTONES DE PERFIL */
+
+.boton-rol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.boton-rol svg {
+    width: 22px;
+    height: 22px;
+    stroke-width: 1.8;
+}
+
+/* SELECTOR DE TEMA */
+
+.boton-tema {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+
+    width: 46px;
+    height: 46px;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: rgba(20, 20, 20, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.boton-tema svg {
+    width: 21px;
+    height: 21px;
+}
+
+/* =================================
+   6. TEMA CLARO
+================================= */
+
+body.tema-claro {
+    color: #1b1b1b;
+
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.45)),
+        url("./assets/fondo-tatami.jpg");
+}
+
+/* Botones del tema claro */
+
+body.tema-claro button {
+    color: #1b1b1b;
+    background: rgba(255, 255, 255, 0.80);
+    border-color: rgba(0, 0, 0, 0.25);
+}
+
+body.tema-claro button:hover {
+    background: rgba(255, 255, 255, 0.95);
+}
