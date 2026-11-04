@@ -36,11 +36,153 @@
                 </button>
             </div>
         </section>
+        
+        <!-- =================================
+         PANTALLA DE PARTICIPANTE
+         ================================= -->
+        
+        <section id="pantalla-participante" class="pantalla">
+            <h1>Participante</h1>
+            <p>¿Qué deseas hacer?</p>
+
+            <div class="opciones">
+                <button id="btn-ver-participantes" class="boton-rol">
+                    <i data-lucide="users-round"></i>
+                    Ver participantes
+                </button>
+
+                <button id="btn-inscribirme" class="boton-rol">
+                    <i data-lucide="clipboard-pen-line"></i>
+                    Inscribirme
+                </button>
+
+                <button class="btn-volver">Volver</button>
+            </div>
+        </section>
+
+
+        <!-- =================================
+        INICIO DE SESIÓN DEL PROFESOR
+        ================================= -->
+
+        <section id="pantalla-login-profesor" class="pantalla">
+            <h1>Profesor</h1>
+            <p>Iniciá sesión para continuar</p>
+
+            <form id="form-profesor" class="formulario-login">
+                <input
+                    type="text"
+                    id="usuario-profesor"
+                    placeholder="Usuario"
+                    autocomplete="username"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="password-profesor"
+                    placeholder="Contraseña"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <button type="submit">Iniciar sesión</button>
+            </form>
+
+            <p id="mensaje-profesor" class="mensaje-login"></p>
+
+            <button class="btn-volver">Volver</button>
+        </section>
+
+        <!-- =================================
+        MENÚ DEL PROFESOR
+        ================================= -->
+
+        <section id="pantalla-menu-profesor" class="pantalla">
+            <h1>Profesor</h1>
+            <p>Seleccioná una opción</p>
+
+            <div class="opciones">
+                <button id="btn-menu-ver-participantes" class="boton-rol">
+                    <i data-lucide="users-round"></i>
+                    Ver participantes
+                </button>
+
+                <button id="btn-inscribir-alumnos" class="boton-rol">
+                    <i data-lucide="clipboard-pen-line"></i>
+                    Inscribir alumnos
+                </button>
+
+                <button class="btn-volver">Volver</button>
+            </div>
+        </section>
+
+        <!-- =================================
+        INICIO DE SESIÓN DEL ORGANIZADOR
+        ================================= -->
+
+        <section id="pantalla-login-organizador" class="pantalla">
+            <h1>Organizador</h1>
+            <p>Iniciá sesión para continuar</p>
+
+            <form id="form-organizador" class="formulario-login">
+                <input
+                    type="text"
+                    id="usuario-organizador"
+                    placeholder="Usuario"
+                    autocomplete="username"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="password-organizador"
+                    placeholder="Contraseña"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <button type="submit">Iniciar sesión</button>
+            </form>
+
+            <p id="mensaje-organizador" class="mensaje-login"></p>
+
+            <button class="btn-volver">Volver</button>
+        </section>
+
+
+        <!-- =================================
+        MENÚ DEL ORGANIZADOR
+        ================================= -->
+
+        <section id="pantalla-menu-organizador" class="pantalla">
+            <h1>Organizador</h1>
+            <p>Panel de organización</p>
+
+            <div class="opciones">
+                <button id="btn-administracion">
+                    Administración
+                </button>
+
+                <button class="btn-volver">Volver</button>
+            </div>
+        </section>
+
+        <!-- =================================
+        PANTALLA PROVISIONAL
+        ================================= -->
+
+        <section id="pantalla-provisional" class="pantalla">
+            <h1>¡Ups!</h1>
+            <p id="texto-provisional"></p>
+
+            <button class="btn-volver">Volver</button>
+        </section>
+
+        <button id="btn-tema" class="boton-tema" aria-label="Cambiar tema">
+            <i data-lucide="sun"></i>
+        </button>
     </main>
-    
-    <button id="btn-tema" class="boton-tema" aria-label="Cambiar tema">
-        <i data-lucide="sun"></i>
-    </button>
 
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
