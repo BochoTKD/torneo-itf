@@ -50,6 +50,15 @@ body {
     display: block;
 }
 
+/* Evita que las pantallas ocultas ocupen espacio */
+#app {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
 /* =================================
    4. TÍTULOS Y TEXTOS
 ================================= */
@@ -157,4 +166,57 @@ body.tema-claro button {
 
 body.tema-claro button:hover {
     background: rgba(255, 255, 255, 0.95);
+}
+
+/* =================================
+   7. FORMULARIOS DE INICIO DE SESIÓN
+================================= */
+
+.formulario-login {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.formulario-login input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 12px;
+    outline: none;
+
+    background: rgba(20, 20, 20, 0.75);
+    color: white;
+    font-size: 1rem;
+}
+
+.formulario-login input::placeholder {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.formulario-login input:focus {
+    border-color: white;
+}
+
+.mensaje-login {
+    font-size: 0.95rem;
+    min-height: 22px;
+    margin-bottom: 15px;
+}
+
+/* ADAPTACIÓN AL TEMA CLARO */
+
+body.tema-claro .formulario-login input {
+    background: rgba(255, 255, 255, 0.85);
+    color: #1b1b1b;
+    border-color: rgba(0, 0, 0, 0.25);
+}
+
+body.tema-claro .formulario-login input::placeholder {
+    color: rgba(0, 0, 0, 0.55);
+}
+
+body.tema-claro .formulario-login input:focus {
+    border-color: #1b1b1b;
 }
