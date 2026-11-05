@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -387,6 +388,72 @@
 
         </section>
 
+        <!-- LISTADO PÚBLICO DE PARTICIPANTES -->
+<!-- LISTADO PÚBLICO DE PARTICIPANTES -->
+<section id="pantalla-listado-publico" class="pantalla">
+
+    <div class="encabezado-pantalla">
+        <span class="etiqueta-portada">TORNEO ITF</span>
+        <h1>Participantes</h1>
+        <p>Listado de competidores inscriptos.</p>
+    </div>
+
+    <div class="panel-listado">
+
+        <div class="herramientas-listado">
+
+            <div class="campo-buscador">
+                <i data-lucide="search"></i>
+                <input
+                    type="search"
+                    id="buscar-participante"
+                    placeholder="Buscar por nombre o apellido..."
+                >
+            </div>
+
+            <div class="filtros-listado">
+                <select id="filtro-profesor">
+                    <option value="">Todos los profesores</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="resumen-listado">
+            <span id="cantidad-participantes">Cargando participantes...</span>
+        </div>
+
+        <div id="estado-listado" class="estado-listado">
+            Cargando listado...
+        </div>
+
+        <div class="tabla-contenedor" id="contenedor-tabla" hidden>
+
+            <table class="tabla-participantes">
+
+                <thead>
+                    <tr>
+                        <th>Participante</th>
+                        <th>Edad</th>
+                        <th>Graduación</th>
+                        <th>Profesor</th>
+                    </tr>
+                </thead>
+
+                <tbody id="cuerpo-tabla-participantes"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <button class="btn-volver" type="button">
+        <i data-lucide="arrow-left"></i>
+        Volver
+    </button>
+
+</section>
 
         <!-- =================================
              PANTALLA PROVISIONAL
