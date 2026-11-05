@@ -910,3 +910,291 @@ input:focus-visible {
         transition-duration: 0.01ms !important;
     }
 }
+
+/* =========================================
+   LISTADO DE PARTICIPANTES
+========================================= */
+
+.panel-listado {
+    width: 100%;
+    min-width: 0;
+    padding: 22px;
+    margin-top: 20px;
+
+    background: var(--fondo-tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+}
+
+.herramientas-listado {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.campo-buscador {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    width: 100%;
+    min-height: 48px;
+    padding: 0 15px;
+
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    background: var(--fondo-secundario);
+}
+
+.campo-buscador i {
+    color: var(--texto-secundario);
+    flex-shrink: 0;
+}
+
+.campo-buscador input {
+    width: 100%;
+    min-width: 0;
+
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--texto);
+
+    font: inherit;
+}
+
+.campo-buscador input::placeholder {
+    color: var(--texto-secundario);
+}
+
+.filtros-listado {
+    display: flex;
+    width: 100%;
+}
+
+.filtros-listado select {
+    width: 100%;
+    min-height: 44px;
+    padding: 0 12px;
+
+    border: 1px solid var(--borde);
+    border-radius: 9px;
+    background: var(--fondo-secundario);
+    color: var(--texto);
+
+    font: inherit;
+}
+
+.resumen-listado {
+    margin: 20px 0 12px;
+
+    color: var(--texto-secundario);
+    font-size: 0.9rem;
+}
+
+.tabla-contenedor {
+    width: 100%;
+    min-width: 0;
+    overflow: visible;
+
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+}
+
+.tabla-contenedor[hidden],
+.estado-listado[hidden] {
+    display: none !important;
+}
+
+.tabla-participantes {
+    width: 100%;
+    min-width: 0;
+
+    border-collapse: collapse;
+    table-layout: auto;
+    text-align: left;
+}
+
+.tabla-participantes th,
+.tabla-participantes td {
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--borde);
+
+    font-size: 0.9rem;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+.tabla-participantes th {
+    background: var(--fondo-secundario);
+    color: var(--texto-secundario);
+    font-weight: 700;
+}
+
+.tabla-participantes td {
+    color: var(--texto);
+}
+
+.tabla-participantes td:first-child {
+    font-weight: 700;
+}
+
+.tabla-participantes tbody tr:hover {
+    background: rgba(180, 30, 30, 0.06);
+}
+
+.tabla-participantes tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.estado-listado {
+    padding: 30px 15px;
+    text-align: center;
+    color: var(--texto-secundario);
+}
+
+.estado-listado.error {
+    color: #e05252;
+}
+
+
+/* =========================================
+   LISTADO EN CELULARES: TARJETAS
+========================================= */
+
+@media (max-width: 600px) {
+
+    .panel-listado {
+        padding: 13px;
+    }
+
+    .tabla-contenedor {
+        border: none;
+    }
+
+    .tabla-participantes {
+        display: block;
+    }
+
+    .tabla-participantes thead {
+        display: none;
+    }
+
+    .tabla-participantes tbody {
+        display: grid;
+        gap: 12px;
+    }
+
+    .tabla-participantes tbody tr {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        padding: 8px 12px;
+
+        background: var(--fondo-secundario);
+        border: 1px solid var(--borde);
+        border-radius: 12px;
+    }
+
+    .tabla-participantes tbody td {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+
+        min-width: 0;
+        padding: 9px 5px;
+
+        border: none;
+        font-size: 0.85rem;
+    }
+
+    .tabla-participantes tbody td::before {
+        content: attr(data-label);
+
+        color: var(--texto-secundario);
+        font-size: 0.68rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .tabla-participantes tbody td:first-child {
+        grid-column: 1 / -1;
+
+        padding-bottom: 12px;
+        margin-bottom: 4px;
+
+        border-bottom: 1px solid var(--borde);
+
+        font-size: 1rem;
+    }
+
+    .tabla-participantes tbody td:last-child {
+        grid-column: 1 / -1;
+    }
+}
+
+/* =================================
+   LISTADO DE PARTICIPANTES
+   Evitar desplazamiento horizontal
+================================= */
+
+.contenedor-tabla,
+.tabla-contenedor,
+.contenedor-listado {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+}
+
+table {
+    width: 100%;
+    max-width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 10px 8px;
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+/* Evitar que el contenido ensanche la página */
+.pantalla,
+main,
+#app {
+    max-width: 100%;
+    min-width: 0;
+}
+
+/* Ajustes para celulares */
+@media (max-width: 700px) {
+    th,
+    td {
+        padding: 8px 5px;
+        font-size: 0.78rem;
+    }
+}
+/* CORRECCIÓN DE DESPLEGABLES EN TEMA OSCURO */
+select {
+    color: var(--texto);
+    background-color: var(--fondo-tarjeta);
+    border: 1px solid var(--borde);
+}
+
+/* Opciones que aparecen al abrir el desplegable */
+select option {
+    color: #222222;
+    background-color: #ffffff;
+}
+
+/* Tema oscuro */
+[data-tema="oscuro"] select option,
+.tema-oscuro select option {
+    color: #ffffff;
+    background-color: #252525;
+}
