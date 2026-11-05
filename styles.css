@@ -1,7 +1,22 @@
 
-/* =================================
+/* =========================================
    1. CONFIGURACIÓN GENERAL
-================================= */
+========================================= */
+
+:root {
+    --rojo: #d62828;
+    --rojo-hover: #ed3737;
+
+    --fondo-tarjeta: rgba(17, 20, 25, 0.88);
+    --fondo-secundario: rgba(255, 255, 255, 0.055);
+
+    --texto: #f5f5f5;
+    --texto-secundario: #aeb4bd;
+
+    --borde: rgba(255, 255, 255, 0.13);
+
+    --sombra: 0 18px 55px rgba(0, 0, 0, 0.35);
+}
 
 * {
     margin: 0;
@@ -11,11 +26,674 @@
 
 body {
     min-height: 100vh;
-    font-family: Arial, sans-serif;
-    color: white;
+    font-family: "Inter", Arial, sans-serif;
+    color: var(--texto);
 
-    background-image:
-        linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+    background:
+        linear-gradient(
+            rgba(7, 9, 13, 0.82),
+            rgba(7, 9, 13, 0.88)
+        ),
+        url("./assets/fondo-tatami.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    color: inherit;
+}
+
+
+/* =========================================
+   2. CONTENEDOR PRINCIPAL
+========================================= */
+
+#app {
+    width: 100%;
+    max-width: 1200px;
+    min-height: 100vh;
+
+    margin: 0 auto;
+    padding: 0 42px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================================
+   3. ENCABEZADO
+========================================= */
+
+.encabezado {
+    width: 100%;
+    min-height: 90px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid var(--borde);
+}
+
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.marca-icono {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    background: var(--rojo);
+    border-radius: 12px;
+}
+
+.marca-icono svg {
+    width: 25px;
+    height: 25px;
+}
+
+.marca-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.marca-texto strong {
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 1.5px;
+}
+
+.marca-texto span {
+    font-size: 0.62rem;
+    letter-spacing: 2px;
+    color: var(--texto-secundario);
+}
+
+
+/* =========================================
+   4. PANTALLAS
+========================================= */
+
+.pantalla {
+    display: none;
+    width: 100%;
+
+    max-width: 850px;
+    margin: auto;
+
+    padding: 55px 0;
+    text-align: left;
+
+    animation: aparecer 0.35s ease;
+}
+
+.pantalla.activa {
+    display: block;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================
+   5. PORTADA PRINCIPAL
+========================================= */
+
+#pantalla-inicio {
+    max-width: 100%;
+}
+
+.portada {
+    min-height: 290px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: relative;
+    overflow: hidden;
+
+    padding: 35px 45px;
+
+    background:
+        linear-gradient(
+            100deg,
+            rgba(10, 12, 16, 0.98),
+            rgba(10, 12, 16, 0.78),
+            rgba(130, 20, 20, 0.45)
+        );
+
+    border: 1px solid var(--borde);
+    border-radius: 20px;
+
+    box-shadow: var(--sombra);
+}
+
+.portada-contenido {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+}
+
+.etiqueta-portada {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 20px;
+
+    color: #ff7777;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.punto {
+    width: 8px;
+    height: 8px;
+
+    background: var(--rojo);
+    border-radius: 50%;
+
+    box-shadow: 0 0 12px var(--rojo);
+}
+
+.portada h1,
+.encabezado-pantalla h1 {
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: 1px;
+}
+
+.portada h1 span {
+    color: var(--rojo);
+}
+
+.portada p {
+    max-width: 440px;
+
+    margin-top: 20px;
+
+    color: #c4c8ce;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.linea-decorativa {
+    width: 75px;
+    height: 4px;
+
+    margin-top: 25px;
+
+    background: var(--rojo);
+    border-radius: 10px;
+}
+
+.portada-decoracion {
+    width: 200px;
+    height: 200px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    color: rgba(255, 255, 255, 0.12);
+
+    border: 2px solid rgba(255, 255, 255, 0.09);
+    border-radius: 50%;
+
+    transform: rotate(-12deg);
+}
+
+.portada-decoracion svg {
+    width: 100px;
+    height: 100px;
+    stroke-width: 1;
+}
+
+.portada-decoracion span {
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: 1rem;
+    letter-spacing: 3px;
+}
+
+
+/* =========================================
+   6. SELECTOR DE ROL
+========================================= */
+
+.selector-rol {
+    padding: 45px 0 20px;
+}
+
+.titulo-seccion {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+
+    margin-bottom: 25px;
+}
+
+.numero-seccion {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    background: rgba(214, 40, 40, 0.16);
+
+    border: 1px solid rgba(214, 40, 40, 0.35);
+    border-radius: 10px;
+
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.titulo-seccion h2 {
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.5px;
+}
+
+.titulo-seccion p {
+    margin-top: 3px;
+    color: var(--texto-secundario);
+    font-size: 0.85rem;
+}
+
+
+/* =========================================
+   7. TARJETAS Y OPCIONES
+========================================= */
+
+.opciones {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.boton-rol {
+    min-height: 170px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    position: relative;
+
+    padding: 22px;
+
+    text-align: left;
+
+    background: var(--fondo-tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 15px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.boton-rol:hover {
+    transform: translateY(-5px);
+
+    border-color: rgba(214, 40, 40, 0.7);
+
+    background: rgba(35, 25, 28, 0.96);
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.icono-rol {
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #ff7777;
+    background: rgba(214, 40, 40, 0.15);
+
+    border-radius: 11px;
+}
+
+.icono-rol svg {
+    width: 22px;
+    height: 22px;
+}
+
+.texto-rol {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    padding-right: 15px;
+}
+
+.texto-rol strong {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.texto-rol small {
+    color: var(--texto-secundario);
+    font-size: 0.76rem;
+    line-height: 1.5;
+}
+
+.flecha-rol {
+    position: absolute;
+    right: 19px;
+    bottom: 21px;
+
+    width: 18px;
+    height: 18px;
+
+    color: #ff7777;
+
+    transition: transform 0.2s ease;
+}
+
+.boton-rol:hover .flecha-rol {
+    transform: translate(3px, -3px);
+}
+
+
+/* =========================================
+   8. ENCABEZADOS DE OTRAS PANTALLAS
+========================================= */
+
+.encabezado-pantalla {
+    margin-bottom: 35px;
+}
+
+.encabezado-pantalla h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: 12px;
+}
+
+.encabezado-pantalla p {
+    color: var(--texto-secundario);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   9. FORMULARIOS
+========================================= */
+
+.formulario-login {
+    width: 100%;
+    max-width: 470px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    padding: 28px;
+
+    background: var(--fondo-tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 17px;
+
+    box-shadow: var(--sombra);
+}
+
+.formulario-login label {
+    margin-top: 7px;
+
+    color: var(--texto-secundario);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.campo-login {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 0 15px;
+
+    background: var(--fondo-secundario);
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+
+    transition: border-color 0.2s ease;
+}
+
+.campo-login:focus-within {
+    border-color: var(--rojo);
+}
+
+.campo-login svg {
+    width: 18px;
+    height: 18px;
+    color: var(--texto-secundario);
+}
+
+.formulario-login input {
+    width: 100%;
+    min-width: 0;
+
+    padding: 15px 0;
+
+    color: var(--texto);
+    background: transparent;
+    border: none;
+    outline: none;
+
+    font-size: 0.9rem;
+}
+
+.formulario-login input::placeholder {
+    color: #858b94;
+}
+
+.boton-principal {
+    width: 100%;
+    min-height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    margin-top: 15px;
+
+    color: white;
+    background: var(--rojo);
+    border: none;
+    border-radius: 10px;
+
+    font-weight: 700;
+    cursor: pointer;
+
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.boton-principal:hover {
+    background: var(--rojo-hover);
+    transform: translateY(-2px);
+}
+
+.boton-principal svg {
+    width: 18px;
+    height: 18px;
+}
+
+.mensaje-login {
+    min-height: 22px;
+    margin-top: 12px;
+
+    color: var(--texto-secundario);
+    font-size: 0.85rem;
+}
+
+
+/* =========================================
+   10. BOTONES GENERALES
+========================================= */
+
+button {
+    font-family: inherit;
+}
+
+.btn-volver {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    margin-top: 25px;
+    padding: 11px 16px;
+
+    color: var(--texto-secundario);
+    background: transparent;
+    border: 1px solid var(--borde);
+    border-radius: 9px;
+
+    font-size: 0.85rem;
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.btn-volver:hover {
+    color: white;
+    background: var(--fondo-secundario);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateX(-3px);
+}
+
+.btn-volver svg {
+    width: 17px;
+    height: 17px;
+}
+
+
+/* =========================================
+   11. SELECTOR DE TEMA
+========================================= */
+
+.boton-tema {
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--texto);
+    background: var(--fondo-secundario);
+
+    border: 1px solid var(--borde);
+    border-radius: 11px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.boton-tema:hover {
+    color: #ff7777;
+    border-color: var(--rojo);
+}
+
+.boton-tema svg {
+    width: 20px;
+    height: 20px;
+}
+
+
+/* =========================================
+   12. PIE DE PÁGINA
+========================================= */
+
+.pie-pagina {
+    width: 100%;
+    min-height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    margin-top: auto;
+
+    border-top: 1px solid var(--borde);
+
+    color: var(--texto-secundario);
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+}
+
+.pie-pagina span:first-child {
+    color: var(--texto);
+    font-weight: 700;
+}
+
+
+/* =========================================
+   13. TEMA CLARO
+========================================= */
+
+body.tema-claro {
+    --fondo-tarjeta: rgba(255, 255, 255, 0.91);
+    --fondo-secundario: rgba(0, 0, 0, 0.045);
+
+    --texto: #20232a;
+    --texto-secundario: #626a75;
+
+    --borde: rgba(0, 0, 0, 0.13);
+
+    --sombra: 0 18px 45px rgba(0, 0, 0, 0.12);
+
+    background:
+        linear-gradient(
+            rgba(255, 255, 255, 0.76),
+            rgba(255, 255, 255, 0.84)
+        ),
         url("./assets/fondo-tatami.jpg");
 
     background-size: cover;
@@ -23,200 +701,212 @@ body {
     background-attachment: fixed;
 }
 
-/* =================================
-   2. CONTENEDOR PRINCIPAL
-================================= */
-
-#app {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 24px;
+body.tema-claro .portada {
+    background:
+        linear-gradient(
+            100deg,
+            rgba(255, 255, 255, 0.97),
+            rgba(255, 255, 255, 0.85),
+            rgba(255, 220, 220, 0.8)
+        );
 }
 
-/* =================================
-   3. PANTALLAS
-================================= */
-
-.pantalla {
-    display: none;
-    width: 100%;
-    max-width: 500px;
-    text-align: center;
+body.tema-claro .portada p {
+    color: #555d68;
 }
 
-.pantalla.activa {
-    display: block;
+body.tema-claro .portada-decoracion {
+    color: rgba(0, 0, 0, 0.12);
+    border-color: rgba(0, 0, 0, 0.09);
 }
 
-/* Evita que las pantallas ocultas ocupen espacio */
-#app {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 24px;
+body.tema-claro .boton-rol:hover {
+    background: rgba(255, 245, 245, 0.98);
 }
 
-/* =================================
-   4. TÍTULOS Y TEXTOS
-================================= */
-
-h1 {
-    font-size: clamp(2rem, 6vw, 3.5rem);
-    margin-bottom: 18px;
+body.tema-claro .btn-volver:hover {
+    color: #20232a;
+    background: rgba(0, 0, 0, 0.06);
 }
 
-p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
+body.tema-claro .campo-login {
+    background: rgba(0, 0, 0, 0.035);
 }
-
-/* =================================
-   5. BOTONES
-================================= */
-
-.opciones {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-button {
-    padding: 16px 24px;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    border-radius: 12px;
-
-    background: rgba(20, 20, 20, 0.75);
-    color: white;
-
-    font-size: 1rem;
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease;
-}
-
-button:hover {
-    background: rgba(70, 70, 70, 0.9);
-    transform: translateY(-2px);
-}
-
-/* BOTONES DE PERFIL */
-
-.boton-rol {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-}
-
-.boton-rol svg {
-    width: 22px;
-    height: 22px;
-    stroke-width: 1.8;
-}
-
-/* SELECTOR DE TEMA */
-
-.boton-tema {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-
-    width: 46px;
-    height: 46px;
-    padding: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-    background: rgba(20, 20, 20, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.35);
-}
-
-.boton-tema svg {
-    width: 21px;
-    height: 21px;
-}
-
-/* =================================
-   6. TEMA CLARO
-================================= */
-
-body.tema-claro {
-    color: #1b1b1b;
-
-    background-image:
-        linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.45)),
-        url("./assets/fondo-tatami.jpg");
-}
-
-/* Botones del tema claro */
-
-body.tema-claro button {
-    color: #1b1b1b;
-    background: rgba(255, 255, 255, 0.80);
-    border-color: rgba(0, 0, 0, 0.25);
-}
-
-body.tema-claro button:hover {
-    background: rgba(255, 255, 255, 0.95);
-}
-
-/* =================================
-   7. FORMULARIOS DE INICIO DE SESIÓN
-================================= */
-
-.formulario-login {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin-bottom: 18px;
-}
-
-.formulario-login input {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    border-radius: 12px;
-    outline: none;
-
-    background: rgba(20, 20, 20, 0.75);
-    color: white;
-    font-size: 1rem;
-}
-
-.formulario-login input::placeholder {
-    color: rgba(255, 255, 255, 0.65);
-}
-
-.formulario-login input:focus {
-    border-color: white;
-}
-
-.mensaje-login {
-    font-size: 0.95rem;
-    min-height: 22px;
-    margin-bottom: 15px;
-}
-
-/* ADAPTACIÓN AL TEMA CLARO */
 
 body.tema-claro .formulario-login input {
-    background: rgba(255, 255, 255, 0.85);
-    color: #1b1b1b;
-    border-color: rgba(0, 0, 0, 0.25);
+    color: #20232a;
 }
 
 body.tema-claro .formulario-login input::placeholder {
-    color: rgba(0, 0, 0, 0.55);
+    color: #858b94;
 }
 
-body.tema-claro .formulario-login input:focus {
-    border-color: #1b1b1b;
+
+/* =========================================
+   14. RESPONSIVE - TABLETS
+========================================= */
+
+@media (max-width: 850px) {
+
+    #app {
+        padding: 0 25px;
+    }
+
+    .opciones {
+        grid-template-columns: 1fr;
+    }
+
+    .boton-rol {
+        min-height: 115px;
+
+        display: grid;
+        grid-template-columns: 48px 1fr 20px;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .texto-rol {
+        padding: 0;
+    }
+
+    .flecha-rol {
+        position: static;
+    }
+
+    .portada {
+        min-height: 260px;
+        padding: 30px;
+    }
+
+    .portada-decoracion {
+        width: 150px;
+        height: 150px;
+    }
+
+    .portada-decoracion svg {
+        width: 70px;
+        height: 70px;
+    }
+
+}
+
+
+/* =========================================
+   15. RESPONSIVE - CELULARES
+========================================= */
+
+@media (max-width: 550px) {
+
+    #app {
+        padding: 0 18px;
+    }
+
+    .encabezado {
+        min-height: 75px;
+    }
+
+    .marca-icono {
+        width: 39px;
+        height: 39px;
+    }
+
+    .marca-texto strong {
+        font-size: 1.3rem;
+    }
+
+    .marca-texto span {
+        font-size: 0.52rem;
+        letter-spacing: 1.3px;
+    }
+
+    .boton-tema {
+        width: 39px;
+        height: 39px;
+    }
+
+    .pantalla {
+        padding: 35px 0;
+    }
+
+    .portada {
+        min-height: 280px;
+        padding: 28px 23px;
+    }
+
+    .portada h1 {
+        font-size: 3.3rem;
+    }
+
+    .portada p {
+        max-width: 280px;
+        font-size: 0.9rem;
+    }
+
+    .portada-decoracion {
+        position: absolute;
+        right: -45px;
+        bottom: -45px;
+
+        width: 150px;
+        height: 150px;
+
+        opacity: 0.6;
+    }
+
+    .portada-decoracion svg {
+        width: 65px;
+        height: 65px;
+    }
+
+    .selector-rol {
+        padding-top: 35px;
+    }
+
+    .titulo-seccion h2 {
+        font-size: 1.7rem;
+    }
+
+    .boton-rol {
+        min-height: 105px;
+        padding: 17px;
+    }
+
+    .formulario-login {
+        padding: 21px;
+    }
+
+    .encabezado-pantalla h1 {
+        font-size: 2.8rem;
+    }
+
+    .pie-pagina {
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 6px;
+
+        padding: 17px 0;
+        font-size: 0.58rem;
+    }
+
+}
+
+
+/* =========================================
+   16. ACCESIBILIDAD
+========================================= */
+
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--rojo);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
 }
