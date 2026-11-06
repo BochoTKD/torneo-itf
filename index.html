@@ -165,6 +165,19 @@
                     <i data-lucide="arrow-up-right" class="flecha-rol"></i>
                 </button>
 
+                <button id="btn-ver-categorias" class="boton-rol">
+    <span class="icono-rol">
+        <i data-lucide="layers"></i>
+    </span>
+
+    <span class="texto-rol">
+        <strong>Categorías</strong>
+        <small>Consultá las agrupaciones del torneo</small>
+    </span>
+
+    <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+</button>
+
                 <button id="btn-inscribirme" class="boton-rol">
                     <span class="icono-rol">
                         <i data-lucide="clipboard-pen-line"></i>
@@ -398,6 +411,11 @@
         <p>Listado de competidores inscriptos.</p>
     </div>
 
+    <button class="btn-volver" type="button">
+        <i data-lucide="arrow-left"></i>
+        Volver
+    </button>
+
     <div class="panel-listado">
 
         <div class="herramientas-listado">
@@ -448,12 +466,113 @@
 
     </div>
 
+</section>
+
+<!-- =================================
+     CATEGORÍAS DEL TORNEO
+================================== -->
+
+<section id="pantalla-categorias" class="pantalla">
+
+    <div class="encabezado-pantalla">
+        <span class="etiqueta-portada">TORNEO ITF</span>
+        <h1>Categorías</h1>
+        <p>Agrupaciones de participantes por modalidad.</p>
+    </div>
+
     <button class="btn-volver" type="button">
         <i data-lucide="arrow-left"></i>
         Volver
     </button>
 
+    <div class="resumen-listado">
+        <span id="cantidad-categorias">Cargando categorías...</span>
+    </div>
+
+    <div id="estado-categorias" class="estado-listado">
+        Cargando categorías...
+    </div>
+
+    <div id="contenedor-categorias" class="lista-categorias"></div>
+
 </section>
+
+
+<!-- =================================
+     MODAL DE DETALLE DE CATEGORÍA
+================================== -->
+
+<div id="modal-categoria" class="modal-ficha" hidden>
+
+    <div
+        class="modal-ficha-contenedor modal-categoria-contenedor"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="titulo-modal-categoria"
+    >
+
+        <div class="modal-ficha-barra">
+
+            <div>
+                <span class="etiqueta-portada">TORNEO ITF</span>
+                <h2 id="titulo-modal-categoria">Categoría</h2>
+            </div>
+
+            <button
+                id="btn-cerrar-categoria"
+                class="modal-ficha-cerrar"
+                type="button"
+                aria-label="Cerrar categoría"
+            >
+                <i data-lucide="x"></i>
+            </button>
+
+        </div>
+
+        <div id="contenido-modal-categoria"></div>
+
+    </div>
+
+</div>
+
+<!-- =================================
+     VENTANA EMERGENTE DEL PARTICIPANTE
+================================== -->
+
+<div
+    id="modal-ficha-publica"
+    class="modal-ficha"
+    hidden
+    role="presentation"
+>
+    <div
+        class="modal-ficha-contenedor"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="titulo-modal-ficha"
+    >
+
+        <div class="modal-ficha-barra">
+            <div>
+                <span class="etiqueta-portada">TORNEO ITF</span>
+                <h2 id="titulo-modal-ficha">Ficha del participante</h2>
+            </div>
+
+            <button
+                id="btn-cerrar-ficha"
+                class="modal-ficha-cerrar"
+                type="button"
+                aria-label="Cerrar ficha"
+                title="Cerrar"
+            >
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+
+        <div id="contenido-ficha-publica"></div>
+
+    </div>
+</div>
 
         <!-- =================================
              PANTALLA PROVISIONAL
