@@ -6,15 +6,11 @@
 :root {
     --rojo: #d62828;
     --rojo-hover: #ed3737;
-
     --fondo-tarjeta: rgba(17, 20, 25, 0.88);
     --fondo-secundario: rgba(255, 255, 255, 0.055);
-
     --texto: #f5f5f5;
     --texto-secundario: #aeb4bd;
-
     --borde: rgba(255, 255, 255, 0.13);
-
     --sombra: 0 18px 55px rgba(0, 0, 0, 0.35);
 }
 
@@ -28,28 +24,24 @@ body {
     min-height: 100vh;
     font-family: "Inter", Arial, sans-serif;
     color: var(--texto);
-
     background:
-        linear-gradient(
-            rgba(7, 9, 13, 0.82),
-            rgba(7, 9, 13, 0.88)
-        ),
+        linear-gradient(rgba(7, 9, 13, 0.82), rgba(7, 9, 13, 0.88)),
         url("./assets/fondo-tatami.jpg");
-
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-
     transition: background 0.3s ease, color 0.3s ease;
 }
 
 button,
-input {
+input,
+select {
     font: inherit;
 }
 
 button {
     color: inherit;
+    cursor: pointer;
 }
 
 
@@ -61,10 +53,8 @@ button {
     width: 100%;
     max-width: 1200px;
     min-height: 100vh;
-
     margin: 0 auto;
     padding: 0 42px;
-
     display: flex;
     flex-direction: column;
 }
@@ -77,11 +67,9 @@ button {
 .encabezado {
     width: 100%;
     min-height: 90px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     border-bottom: 1px solid var(--borde);
 }
 
@@ -94,11 +82,9 @@ button {
 .marca-icono {
     width: 45px;
     height: 45px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     color: white;
     background: var(--rojo);
     border-radius: 12px;
@@ -135,13 +121,10 @@ button {
 .pantalla {
     display: none;
     width: 100%;
-
     max-width: 850px;
     margin: auto;
-
     padding: 55px 0;
     text-align: left;
-
     animation: aparecer 0.35s ease;
 }
 
@@ -154,7 +137,6 @@ button {
         opacity: 0;
         transform: translateY(12px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -172,16 +154,12 @@ button {
 
 .portada {
     min-height: 290px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     position: relative;
     overflow: hidden;
-
     padding: 35px 45px;
-
     background:
         linear-gradient(
             100deg,
@@ -189,10 +167,8 @@ button {
             rgba(10, 12, 16, 0.78),
             rgba(130, 20, 20, 0.45)
         );
-
     border: 1px solid var(--borde);
     border-radius: 20px;
-
     box-shadow: var(--sombra);
 }
 
@@ -206,9 +182,7 @@ button {
     display: inline-flex;
     align-items: center;
     gap: 9px;
-
     margin-bottom: 20px;
-
     color: #ff7777;
     font-size: 0.72rem;
     font-weight: 700;
@@ -218,10 +192,8 @@ button {
 .punto {
     width: 8px;
     height: 8px;
-
     background: var(--rojo);
     border-radius: 50%;
-
     box-shadow: 0 0 12px var(--rojo);
 }
 
@@ -240,9 +212,7 @@ button {
 
 .portada p {
     max-width: 440px;
-
     margin-top: 20px;
-
     color: #c4c8ce;
     font-size: 1rem;
     line-height: 1.7;
@@ -251,9 +221,7 @@ button {
 .linea-decorativa {
     width: 75px;
     height: 4px;
-
     margin-top: 25px;
-
     background: var(--rojo);
     border-radius: 10px;
 }
@@ -261,18 +229,14 @@ button {
 .portada-decoracion {
     width: 200px;
     height: 200px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 15px;
-
     color: rgba(255, 255, 255, 0.12);
-
     border: 2px solid rgba(255, 255, 255, 0.09);
     border-radius: 50%;
-
     transform: rotate(-12deg);
 }
 
@@ -301,24 +265,19 @@ button {
     display: flex;
     align-items: center;
     gap: 17px;
-
     margin-bottom: 25px;
 }
 
 .numero-seccion {
     width: 42px;
     height: 42px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     color: white;
     background: rgba(214, 40, 40, 0.16);
-
     border: 1px solid rgba(214, 40, 40, 0.35);
     border-radius: 10px;
-
     font-size: 0.9rem;
     font-weight: 700;
 }
@@ -348,52 +307,34 @@ button {
 
 .boton-rol {
     min-height: 170px;
-
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-
     position: relative;
-
     padding: 22px;
-
     text-align: left;
-
     background: var(--fondo-tarjeta);
     border: 1px solid var(--borde);
     border-radius: 15px;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        background 0.25s ease,
-        box-shadow 0.25s ease;
+    transition: 0.25s ease;
 }
 
 .boton-rol:hover {
     transform: translateY(-5px);
-
     border-color: rgba(214, 40, 40, 0.7);
-
     background: rgba(35, 25, 28, 0.96);
-
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 
 .icono-rol {
     width: 43px;
     height: 43px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     color: #ff7777;
     background: rgba(214, 40, 40, 0.15);
-
     border-radius: 11px;
 }
 
@@ -406,7 +347,6 @@ button {
     display: flex;
     flex-direction: column;
     gap: 7px;
-
     padding-right: 15px;
 }
 
@@ -425,12 +365,9 @@ button {
     position: absolute;
     right: 19px;
     bottom: 21px;
-
     width: 18px;
     height: 18px;
-
     color: #ff7777;
-
     transition: transform 0.2s ease;
 }
 
@@ -440,7 +377,7 @@ button {
 
 
 /* =========================================
-   8. ENCABEZADOS DE OTRAS PANTALLAS
+   8. ENCABEZADOS DE PANTALLAS
 ========================================= */
 
 .encabezado-pantalla {
@@ -466,23 +403,18 @@ button {
 .formulario-login {
     width: 100%;
     max-width: 470px;
-
     display: flex;
     flex-direction: column;
     gap: 12px;
-
     padding: 28px;
-
     background: var(--fondo-tarjeta);
     border: 1px solid var(--borde);
     border-radius: 17px;
-
     box-shadow: var(--sombra);
 }
 
 .formulario-login label {
     margin-top: 7px;
-
     color: var(--texto-secundario);
     font-size: 0.8rem;
     font-weight: 600;
@@ -492,13 +424,10 @@ button {
     display: flex;
     align-items: center;
     gap: 12px;
-
     padding: 0 15px;
-
     background: var(--fondo-secundario);
     border: 1px solid var(--borde);
     border-radius: 10px;
-
     transition: border-color 0.2s ease;
 }
 
@@ -515,14 +444,11 @@ button {
 .formulario-login input {
     width: 100%;
     min-width: 0;
-
     padding: 15px 0;
-
     color: var(--texto);
     background: transparent;
     border: none;
     outline: none;
-
     font-size: 0.9rem;
 }
 
@@ -533,22 +459,16 @@ button {
 .boton-principal {
     width: 100%;
     min-height: 50px;
-
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-
     margin-top: 15px;
-
     color: white;
     background: var(--rojo);
     border: none;
     border-radius: 10px;
-
     font-weight: 700;
-    cursor: pointer;
-
     transition: background 0.2s ease, transform 0.2s ease;
 }
 
@@ -565,7 +485,6 @@ button {
 .mensaje-login {
     min-height: 22px;
     margin-top: 12px;
-
     color: var(--texto-secundario);
     font-size: 0.85rem;
 }
@@ -575,27 +494,18 @@ button {
    10. BOTONES GENERALES
 ========================================= */
 
-button {
-    font-family: inherit;
-}
-
 .btn-volver {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 9px;
-
     margin-top: 25px;
     padding: 11px 16px;
-
     color: var(--texto-secundario);
     background: transparent;
     border: 1px solid var(--borde);
     border-radius: 9px;
-
     font-size: 0.85rem;
-    cursor: pointer;
-
     transition: 0.2s ease;
 }
 
@@ -619,19 +529,13 @@ button {
 .boton-tema {
     width: 43px;
     height: 43px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     color: var(--texto);
     background: var(--fondo-secundario);
-
     border: 1px solid var(--borde);
     border-radius: 11px;
-
-    cursor: pointer;
-
     transition: 0.2s ease;
 }
 
@@ -653,16 +557,12 @@ button {
 .pie-pagina {
     width: 100%;
     min-height: 65px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 15px;
-
     margin-top: auto;
-
     border-top: 1px solid var(--borde);
-
     color: var(--texto-secundario);
     font-size: 0.65rem;
     letter-spacing: 1.5px;
@@ -681,12 +581,9 @@ button {
 body.tema-claro {
     --fondo-tarjeta: rgba(255, 255, 255, 0.91);
     --fondo-secundario: rgba(0, 0, 0, 0.045);
-
     --texto: #20232a;
     --texto-secundario: #626a75;
-
     --borde: rgba(0, 0, 0, 0.13);
-
     --sombra: 0 18px 45px rgba(0, 0, 0, 0.12);
 
     background:
@@ -743,11 +640,723 @@ body.tema-claro .formulario-login input::placeholder {
 
 
 /* =========================================
-   14. RESPONSIVE - TABLETS
+   14. LISTADO DE PARTICIPANTES
+========================================= */
+
+.panel-listado {
+    width: 100%;
+    min-width: 0;
+    padding: 22px;
+    margin-top: 20px;
+    background: var(--fondo-tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+}
+
+.herramientas-listado {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.campo-buscador {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 48px;
+    padding: 0 15px;
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    background: var(--fondo-secundario);
+}
+
+.campo-buscador i {
+    color: var(--texto-secundario);
+    flex-shrink: 0;
+}
+
+.campo-buscador input {
+    width: 100%;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--texto);
+}
+
+.campo-buscador input::placeholder {
+    color: var(--texto-secundario);
+}
+
+.filtros-listado {
+    display: flex;
+    width: 100%;
+}
+
+.filtros-listado select {
+    width: 100%;
+    min-height: 44px;
+    padding: 0 12px;
+    border: 1px solid var(--borde);
+    border-radius: 9px;
+    background: var(--fondo-secundario);
+    color: var(--texto);
+}
+
+.resumen-listado {
+    margin: 20px 0 12px;
+    color: var(--texto-secundario);
+    font-size: 0.9rem;
+}
+
+.tabla-contenedor {
+    width: 100%;
+    min-width: 0;
+    overflow: visible;
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+}
+
+.tabla-contenedor[hidden],
+.estado-listado[hidden] {
+    display: none !important;
+}
+
+.tabla-participantes {
+    width: 100%;
+    min-width: 0;
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-align: left;
+}
+
+.tabla-participantes th,
+.tabla-participantes td {
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--borde);
+    font-size: 0.9rem;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+.tabla-participantes th {
+    background: var(--fondo-secundario);
+    color: var(--texto-secundario);
+    font-weight: 700;
+}
+
+.tabla-participantes td {
+    color: var(--texto);
+}
+
+.tabla-participantes td:first-child {
+    font-weight: 700;
+}
+
+.tabla-participantes tbody tr:hover {
+    background: rgba(180, 30, 30, 0.06);
+}
+
+.tabla-participantes tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.estado-listado {
+    padding: 30px 15px;
+    text-align: center;
+    color: var(--texto-secundario);
+}
+
+.estado-listado.error {
+    color: #e05252;
+}
+
+.fila-participante {
+    cursor: pointer;
+}
+
+.fila-participante:focus-visible {
+    outline: 2px solid var(--rojo);
+    outline-offset: -2px;
+}
+
+
+/* =========================================
+   15. SELECTORES
+========================================= */
+
+select {
+    color: var(--texto);
+    background-color: var(--fondo-tarjeta);
+    border: 1px solid var(--borde);
+}
+
+select option {
+    color: #222222;
+    background-color: #ffffff;
+}
+
+.tema-claro select option {
+    color: #222222;
+    background-color: #ffffff;
+}
+
+
+/* =========================================
+   16. FICHA DETALLADA DEL PARTICIPANTE
+========================================= */
+
+#contenido-ficha-publica {
+    width: 100%;
+    margin-top: 22px;
+}
+
+.ficha-participante {
+    width: 100%;
+    padding: 25px;
+    background: var(--fondo-tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 17px;
+    box-shadow: var(--sombra);
+}
+
+.ficha-encabezado {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    min-width: 0;
+}
+
+.ficha-avatar {
+    width: 76px;
+    height: 76px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.ficha-avatar svg {
+    width: 39px;
+    height: 39px;
+    stroke-width: 1.7;
+}
+
+.ficha-avatar.masculino {
+    color: #258bc7;
+    background: #dcefff;
+}
+
+.ficha-avatar.femenino {
+    color: #d65c9a;
+    background: #ffe1ef;
+}
+
+.ficha-identidad {
+    flex: 1;
+    min-width: 0;
+}
+
+.ficha-identidad h2 {
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    overflow-wrap: anywhere;
+}
+
+.ficha-rol {
+    margin-top: 5px;
+    color: var(--texto-secundario);
+    font-size: 0.88rem;
+}
+
+.etiqueta-invitado {
+    align-self: flex-start;
+    padding: 7px 11px;
+    color: #f3c96b;
+    background: rgba(190, 140, 20, 0.15);
+    border: 1px solid rgba(190, 140, 20, 0.35);
+    border-radius: 7px;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.ficha-separador {
+    height: 1px;
+    margin: 23px 0;
+    background: var(--borde);
+}
+
+.ficha-datos-basicos,
+.ficha-datos-generales {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.ficha-dato {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.ficha-dato small {
+    color: var(--texto-secundario);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+}
+
+.ficha-dato strong {
+    font-size: 0.95rem;
+    overflow-wrap: anywhere;
+}
+
+.ficha-titulo-seccion {
+    margin-bottom: 17px;
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: 1.65rem;
+    letter-spacing: 0.5px;
+}
+
+.ficha-datos-generales {
+    gap: 18px;
+}
+
+.ficha-profesor {
+    color: var(--texto);
+}
+
+.ficha-modalidades {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.tarjeta-modalidad {
+    min-width: 0;
+    padding: 18px;
+    background: var(--fondo-secundario);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+}
+
+.tarjeta-modalidad h3 {
+    margin-bottom: 12px;
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: 1.5rem;
+}
+
+.modalidad-horario {
+    margin-bottom: 15px;
+    color: var(--texto-secundario);
+    font-size: 0.85rem;
+}
+
+.modalidad-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.boton-ficha-secundario {
+    min-height: 39px;
+    padding: 9px 12px;
+    color: var(--texto);
+    background: transparent;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    font-size: 0.76rem;
+    font-weight: 600;
+}
+
+.boton-ficha-secundario:hover:not(:disabled) {
+    border-color: var(--rojo);
+    background: rgba(214, 40, 40, 0.1);
+}
+
+.boton-ficha-secundario:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.detalle-categoria {
+    display: none;
+    margin-top: 14px;
+    padding: 12px;
+    background: var(--fondo-tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    color: var(--texto-secundario);
+    font-size: 0.8rem;
+    line-height: 1.7;
+}
+
+.detalle-categoria.visible {
+    display: block;
+}
+
+.ficha-nota-horarios {
+    margin-top: 17px;
+    color: var(--texto-secundario);
+    font-size: 0.76rem;
+    line-height: 1.6;
+}
+
+.ficha-sin-modalidades {
+    color: var(--texto-secundario);
+    font-size: 0.9rem;
+}
+
+
+/* =========================================
+   17. MODALES GENERALES Y FICHA
+========================================= */
+
+.modal-ficha[hidden] {
+    display: none !important;
+}
+
+.modal-ficha {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.78);
+    backdrop-filter: blur(5px);
+    animation: aparecerModal 0.18s ease;
+}
+
+.modal-ficha-contenedor {
+    width: 100%;
+    max-width: 760px;
+    max-height: 90vh;
+    min-width: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: var(--fondo-tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 17px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.55);
+}
+
+.modal-ficha-barra {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 18px 24px;
+    background: var(--fondo-tarjeta);
+    border-bottom: 1px solid var(--borde);
+}
+
+.modal-ficha-barra > div {
+    min-width: 0;
+}
+
+.modal-ficha-barra .etiqueta-portada {
+    margin-bottom: 5px;
+    font-size: 0.62rem;
+}
+
+.modal-ficha-barra h2 {
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: 1.65rem;
+}
+
+.modal-ficha-cerrar {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--texto-secundario);
+    background: var(--fondo-secundario);
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    transition: 0.2s ease;
+}
+
+.modal-ficha-cerrar:hover {
+    color: white;
+    background: var(--rojo);
+    border-color: var(--rojo);
+}
+
+.modal-ficha-cerrar svg {
+    width: 21px;
+    height: 21px;
+}
+
+#contenido-ficha-publica {
+    margin: 0;
+    padding: 20px;
+}
+
+#contenido-ficha-publica .ficha-participante {
+    border: none;
+    box-shadow: none;
+    padding: 5px;
+}
+
+body.modal-abierto {
+    overflow: hidden;
+}
+
+@keyframes aparecerModal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+/* =========================================
+   18. PANTALLA DE CATEGORÍAS
+========================================= */
+
+#contenedor-categorias {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    width: 100%;
+}
+
+.seccion-categorias {
+    width: 100%;
+}
+
+.encabezado-modalidad-categorias {
+    margin: 0 0 14px;
+    padding-bottom: 10px;
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--borde);
+}
+
+.lista-categorias {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(270px, 100%), 340px));
+    justify-content: start;
+    gap: 12px;
+    width: 100%;
+}
+
+.tarjeta-categoria {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    min-width: 0;
+    min-height: 112px;
+    padding: 16px 42px 16px 17px;
+    color: var(--texto);
+    background: var(--fondo-tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 13px;
+    text-align: left;
+    transition: 0.18s ease;
+}
+
+.tarjeta-categoria:hover {
+    transform: translateY(-2px);
+    border-color: var(--rojo);
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.09);
+}
+
+.titulo-tarjeta-categoria {
+    font-size: 0.94rem;
+    line-height: 1.45;
+    font-weight: 750;
+    overflow-wrap: anywhere;
+}
+
+.cantidad-tarjeta-categoria {
+    font-size: 0.82rem;
+    color: var(--texto-secundario);
+}
+
+.flecha-tarjeta-categoria {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    opacity: 0.7;
+}
+
+.flecha-tarjeta-categoria i {
+    width: 19px;
+    height: 19px;
+}
+
+
+/* =========================================
+   19. MODAL DE DETALLE DE CATEGORÍA
+   Independiente de la ficha del participante
+========================================= */
+
+#modal-categoria {
+    padding: 20px;
+}
+
+#modal-categoria .modal-categoria-contenedor {
+    display: block;
+    flex: 0 1 720px;
+    width: 100%;
+    max-width: 720px;
+    min-width: 0;
+    max-height: 90vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+    background: var(--fondo-tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 17px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.55);
+}
+
+#modal-categoria .modal-ficha-barra {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    width: 100%;
+    padding: 20px 24px;
+    background: var(--fondo-tarjeta);
+    border-bottom: 1px solid var(--borde);
+}
+
+#modal-categoria .modal-ficha-barra > div {
+    flex: 1;
+    min-width: 0;
+}
+
+#modal-categoria .modal-ficha-barra h2 {
+    max-width: 100%;
+    margin: 0;
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+
+#contenido-modal-categoria {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    padding: 22px 24px 24px;
+    box-sizing: border-box;
+}
+
+#modal-categoria .detalle-categoria-encabezado {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
+    margin: 0 0 18px;
+    padding: 0 0 16px;
+    border-bottom: 1px solid var(--borde);
+}
+
+#modal-categoria .modalidad-detalle-categoria {
+    font-size: 0.95rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+#modal-categoria .separador-modalidad {
+    display: none;
+}
+
+#modal-categoria .detalle-categoria-encabezado strong {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--texto-secundario);
+}
+
+#modal-categoria .lista-participantes-categoria {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+#modal-categoria .participante-categoria {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-width: 0;
+    min-height: 48px;
+    padding: 11px 13px;
+    box-sizing: border-box;
+    color: var(--texto);
+    background: var(--fondo-secundario);
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    text-align: left;
+    transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+#modal-categoria .participante-categoria:hover {
+    border-color: var(--rojo);
+    background: var(--fondo-secundario);
+}
+
+#modal-categoria .numero-participante-categoria {
+    display: grid;
+    place-items: center;
+    flex: 0 0 30px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: var(--texto);
+    background: var(--fondo-tarjeta);
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+#modal-categoria .nombre-participante-categoria {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    font-size: 0.92rem;
+    font-weight: 650;
+}
+
+#modal-categoria .participante-categoria > i {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    color: var(--texto-secundario);
+}
+
+
+/* =========================================
+   20. RESPONSIVE - TABLETS
 ========================================= */
 
 @media (max-width: 850px) {
-
     #app {
         padding: 0 25px;
     }
@@ -758,9 +1367,8 @@ body.tema-claro .formulario-login input::placeholder {
 
     .boton-rol {
         min-height: 115px;
-
         display: grid;
-        grid-template-columns: 48px 1fr 20px;
+        grid-template-columns: 48px minmax(0, 1fr) 20px;
         align-items: center;
         gap: 15px;
     }
@@ -787,16 +1395,14 @@ body.tema-claro .formulario-login input::placeholder {
         width: 70px;
         height: 70px;
     }
-
 }
 
 
 /* =========================================
-   15. RESPONSIVE - CELULARES
+   21. RESPONSIVE - CELULARES
 ========================================= */
 
-@media (max-width: 550px) {
-
+@media (max-width: 600px) {
     #app {
         padding: 0 18px;
     }
@@ -846,10 +1452,8 @@ body.tema-claro .formulario-login input::placeholder {
         position: absolute;
         right: -45px;
         bottom: -45px;
-
         width: 150px;
         height: 150px;
-
         opacity: 0.6;
     }
 
@@ -884,185 +1488,9 @@ body.tema-claro .formulario-login input::placeholder {
         justify-content: center;
         align-items: flex-start;
         gap: 6px;
-
         padding: 17px 0;
         font-size: 0.58rem;
     }
-
-}
-
-
-/* =========================================
-   16. ACCESIBILIDAD
-========================================= */
-
-button:focus-visible,
-input:focus-visible {
-    outline: 2px solid var(--rojo);
-    outline-offset: 3px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-
-/* =========================================
-   LISTADO DE PARTICIPANTES
-========================================= */
-
-.panel-listado {
-    width: 100%;
-    min-width: 0;
-    padding: 22px;
-    margin-top: 20px;
-
-    background: var(--fondo-tarjeta);
-    border: 1px solid var(--borde);
-    border-radius: 16px;
-}
-
-.herramientas-listado {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-.campo-buscador {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    width: 100%;
-    min-height: 48px;
-    padding: 0 15px;
-
-    border: 1px solid var(--borde);
-    border-radius: 10px;
-    background: var(--fondo-secundario);
-}
-
-.campo-buscador i {
-    color: var(--texto-secundario);
-    flex-shrink: 0;
-}
-
-.campo-buscador input {
-    width: 100%;
-    min-width: 0;
-
-    border: none;
-    outline: none;
-    background: transparent;
-    color: var(--texto);
-
-    font: inherit;
-}
-
-.campo-buscador input::placeholder {
-    color: var(--texto-secundario);
-}
-
-.filtros-listado {
-    display: flex;
-    width: 100%;
-}
-
-.filtros-listado select {
-    width: 100%;
-    min-height: 44px;
-    padding: 0 12px;
-
-    border: 1px solid var(--borde);
-    border-radius: 9px;
-    background: var(--fondo-secundario);
-    color: var(--texto);
-
-    font: inherit;
-}
-
-.resumen-listado {
-    margin: 20px 0 12px;
-
-    color: var(--texto-secundario);
-    font-size: 0.9rem;
-}
-
-.tabla-contenedor {
-    width: 100%;
-    min-width: 0;
-    overflow: visible;
-
-    border: 1px solid var(--borde);
-    border-radius: 10px;
-}
-
-.tabla-contenedor[hidden],
-.estado-listado[hidden] {
-    display: none !important;
-}
-
-.tabla-participantes {
-    width: 100%;
-    min-width: 0;
-
-    border-collapse: collapse;
-    table-layout: auto;
-    text-align: left;
-}
-
-.tabla-participantes th,
-.tabla-participantes td {
-    padding: 14px 12px;
-    border-bottom: 1px solid var(--borde);
-
-    font-size: 0.9rem;
-    white-space: normal;
-    overflow-wrap: anywhere;
-}
-
-.tabla-participantes th {
-    background: var(--fondo-secundario);
-    color: var(--texto-secundario);
-    font-weight: 700;
-}
-
-.tabla-participantes td {
-    color: var(--texto);
-}
-
-.tabla-participantes td:first-child {
-    font-weight: 700;
-}
-
-.tabla-participantes tbody tr:hover {
-    background: rgba(180, 30, 30, 0.06);
-}
-
-.tabla-participantes tbody tr:last-child td {
-    border-bottom: none;
-}
-
-.estado-listado {
-    padding: 30px 15px;
-    text-align: center;
-    color: var(--texto-secundario);
-}
-
-.estado-listado.error {
-    color: #e05252;
-}
-
-
-/* =========================================
-   LISTADO EN CELULARES: TARJETAS
-========================================= */
-
-@media (max-width: 600px) {
 
     .panel-listado {
         padding: 13px;
@@ -1088,9 +1516,7 @@ input:focus-visible {
     .tabla-participantes tbody tr {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-
         padding: 8px 12px;
-
         background: var(--fondo-secundario);
         border: 1px solid var(--borde);
         border-radius: 12px;
@@ -1101,17 +1527,14 @@ input:focus-visible {
         flex-direction: column;
         justify-content: center;
         gap: 5px;
-
         min-width: 0;
         padding: 9px 5px;
-
         border: none;
         font-size: 0.85rem;
     }
 
     .tabla-participantes tbody td::before {
         content: attr(data-label);
-
         color: var(--texto-secundario);
         font-size: 0.68rem;
         font-weight: 600;
@@ -1121,80 +1544,142 @@ input:focus-visible {
 
     .tabla-participantes tbody td:first-child {
         grid-column: 1 / -1;
-
         padding-bottom: 12px;
         margin-bottom: 4px;
-
         border-bottom: 1px solid var(--borde);
-
         font-size: 1rem;
     }
 
     .tabla-participantes tbody td:last-child {
         grid-column: 1 / -1;
     }
-}
 
-/* =================================
-   LISTADO DE PARTICIPANTES
-   Evitar desplazamiento horizontal
-================================= */
+    .ficha-participante {
+        padding: 17px;
+    }
 
-.contenedor-tabla,
-.tabla-contenedor,
-.contenedor-listado {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    overflow-x: hidden;
-}
+    .ficha-encabezado {
+        flex-wrap: wrap;
+        gap: 13px;
+    }
 
-table {
-    width: 100%;
-    max-width: 100%;
-    table-layout: fixed;
-    border-collapse: collapse;
-}
+    .ficha-avatar {
+        width: 62px;
+        height: 62px;
+    }
 
-th,
-td {
-    padding: 10px 8px;
-    overflow-wrap: anywhere;
-    word-break: normal;
-}
+    .ficha-avatar svg {
+        width: 32px;
+        height: 32px;
+    }
 
-/* Evitar que el contenido ensanche la página */
-.pantalla,
-main,
-#app {
-    max-width: 100%;
-    min-width: 0;
-}
+    .etiqueta-invitado {
+        margin-left: 75px;
+        margin-top: -5px;
+    }
 
-/* Ajustes para celulares */
-@media (max-width: 700px) {
-    th,
-    td {
-        padding: 8px 5px;
-        font-size: 0.78rem;
+    .ficha-datos-basicos,
+    .ficha-datos-generales {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px 10px;
+    }
+
+    .ficha-modalidades {
+        grid-template-columns: 1fr;
+    }
+
+    .tarjeta-modalidad {
+        padding: 15px;
+    }
+
+    .modalidad-acciones {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .modal-ficha {
+        padding: 10px;
+        align-items: center;
+    }
+
+    .modal-ficha-contenedor {
+        max-height: 94vh;
+        border-radius: 13px;
+    }
+
+    .modal-ficha-barra {
+        padding: 14px 16px;
+    }
+
+    .modal-ficha-barra h2 {
+        font-size: 1.4rem;
+    }
+
+    #contenido-ficha-publica {
+        padding: 12px;
+    }
+
+    #contenido-ficha-publica .ficha-participante {
+        padding: 8px;
+    }
+
+    .lista-categorias {
+        grid-template-columns: 1fr;
+    }
+
+    .tarjeta-categoria {
+        min-height: 100px;
+    }
+
+    #modal-categoria {
+        padding: 10px;
+    }
+
+    #modal-categoria .modal-categoria-contenedor {
+        width: 100%;
+        max-width: 100%;
+        max-height: 94vh;
+        flex-basis: 100%;
+    }
+
+    #modal-categoria .modal-ficha-barra {
+        padding: 15px;
+    }
+
+    #contenido-modal-categoria {
+        padding: 16px 14px;
+    }
+
+    #modal-categoria .detalle-categoria-encabezado {
+        align-items: flex-start;
     }
 }
-/* CORRECCIÓN DE DESPLEGABLES EN TEMA OSCURO */
-select {
-    color: var(--texto);
-    background-color: var(--fondo-tarjeta);
-    border: 1px solid var(--borde);
+
+
+/* =========================================
+   22. ACCESIBILIDAD Y AJUSTES FINALES
+========================================= */
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--rojo);
+    outline-offset: 3px;
 }
 
-/* Opciones que aparecen al abrir el desplegable */
-select option {
-    color: #222222;
-    background-color: #ffffff;
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
 }
 
-/* Tema oscuro */
-[data-tema="oscuro"] select option,
-.tema-oscuro select option {
-    color: #ffffff;
-    background-color: #252525;
+body.tema-claro .modal-ficha-cerrar:hover {
+    color: white;
+}
+
+body.modal-abierto {
+    overflow: hidden;
 }
