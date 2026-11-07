@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111111">
+
+    <title>Participantes · Torneo General San Martín</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div id="app">
+
+        <!-- ENCABEZADO -->
+        <header class="encabezado">
+
+            <a class="marca" href="../" aria-label="Volver al inicio">
+
+                <div class="marca-icono">
+                    <i data-lucide="trophy"></i>
+                </div>
+
+                <div class="marca-texto">
+                    <strong>Torneo · General San Martín</strong>
+                    <span>PLATAFORMA DE COMPETICIÓN</span>
+                </div>
+
+            </a>
+
+            <button
+                id="btn-tema"
+                class="boton-tema"
+                type="button"
+                aria-label="Cambiar a tema claro"
+                title="Cambiar tema"
+            >
+                <i data-lucide="sun"></i>
+            </button>
+
+        </header>
+
+
+        <!-- LISTADO PÚBLICO DE PARTICIPANTES -->
+        <main>
+
+            <section id="pantalla-listado-publico" class="pantalla activa">
+
+                <div class="encabezado-pantalla">
+
+                    <h1>Participantes</h1>
+
+                    <p>Listado de competidores inscriptos.</p>
+
+                </div>
+
+
+                <button class="btn-volver" id="btn-volver" type="button">
+    <i data-lucide="arrow-left"></i>
+    Volver
+</button>
+
+
+                <div class="panel-listado">
+
+                    <div class="herramientas-listado">
+
+                        <div class="campo-buscador">
+
+                            <i data-lucide="search"></i>
+
+                            <input
+                                type="search"
+                                id="buscar-participante"
+                                placeholder="Buscar por nombre o apellido..."
+                                autocomplete="off"
+                                aria-label="Buscar participante"
+                            >
+
+                        </div>
+
+
+                        <div class="filtros-listado">
+
+                            <select
+                                id="filtro-profesor"
+                                aria-label="Filtrar por profesor"
+                            >
+                                <option value="">Todos los profesores</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="resumen-listado">
+                        <span id="cantidad-participantes">
+                            Cargando participantes...
+                        </span>
+                    </div>
+
+
+                    <div
+                        id="estado-listado"
+                        class="estado-listado"
+                        role="status"
+                        aria-live="polite"
+                    >
+                        Cargando listado...
+                    </div>
+
+
+                    <div
+                        class="tabla-contenedor"
+                        id="contenedor-tabla"
+                        hidden
+                    >
+
+                        <table class="tabla-participantes">
+
+                            <thead>
+                                <tr>
+                                    <th>Participante</th>
+                                    <th>Edad</th>
+                                    <th>Graduación</th>
+                                    <th>Profesor</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="cuerpo-tabla-participantes"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- PIE DE PÁGINA -->
+    <footer class="pie-pagina">
+        <span>General San Martín</span>
+        <span>TAEKWONDO</span>
+    </footer>
+
+    </div>
+
+
+    <!-- FICHA EMERGENTE DEL PARTICIPANTE -->
+    <div
+        id="modal-ficha-publica"
+        class="modal-ficha"
+        hidden
+        role="presentation"
+    >
+
+        <div
+            class="modal-ficha-contenedor"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="titulo-modal-ficha"
+        >
+
+            <div class="modal-ficha-barra">
+
+                <div>
+                    <span class="etiqueta-portada">SISTEMA DE TORNEOS</span>
+                    <h2 id="titulo-modal-ficha">Ficha del participante</h2>
+                </div>
+
+                <button
+                    id="btn-cerrar-ficha"
+                    class="modal-ficha-cerrar"
+                    type="button"
+                    aria-label="Cerrar ficha"
+                    title="Cerrar"
+                >
+                    <i data-lucide="x"></i>
+                </button>
+
+            </div>
+
+            <div id="contenido-ficha-publica"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- LIBRERÍAS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- JAVASCRIPT PROPIO -->
+    <script src="script.js"></script>
+
+</body>
+</html>

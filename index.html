@@ -1,620 +1,248 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#111111">
-
-    <title>Torneo ITF</title>
+    <meta name="description" content="Plataforma de competición de General San Martín.">
+    <title>Torneo · General San Martín</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+<main id="app">
+    <header class="encabezado">
+        <a class="marca" href="#" id="marca-inicio" aria-label="Volver al inicio">
+            <span class="marca-icono"><i data-lucide="trophy"></i></span>
+            <span class="marca-texto">
+                <strong>Torneo · General San Martín</strong>
+                <span>PLATAFORMA DE COMPETICIÓN</span>
+            </span>
+        </a>
 
-    <main id="app">
+        <button id="btn-tema" class="boton-tema" type="button"
+                aria-label="Cambiar a tema claro" title="Cambiar tema">
+            <i data-lucide="sun"></i>
+        </button>
+    </header>
 
-        <!-- ENCABEZADO -->
-        <header class="encabezado">
-            <div class="marca">
-                <div class="marca-icono">
-                    <i data-lucide="trophy"></i>
-                </div>
+    <!-- INICIO -->
+    <section id="pantalla-inicio" class="pantalla activa pantalla-inicio">
+        <div class="portada">
+            <div class="portada-contenido">
+                <span class="etiqueta-portada"><span class="punto"></span> SISTEMA DE TORNEOS</span>
+                <h1>EL ESPÍRITU<br>DE LA <span>COMPETICIÓN.</span></h1>
+                <p>Toda la información de tu torneo de General San Martín en un solo lugar.</p>
+                <div class="linea-decorativa"></div>
+            </div>
+            <div class="portada-decoracion" aria-hidden="true">
+                <i data-lucide="trophy"></i>
+                <span>General San Martín</span>
+            </div>
+        </div>
 
-                <div class="marca-texto">
-                    <strong>TORNEO ITF</strong>
-                    <span>PLATAFORMA DE COMPETICIÓN</span>
+        <div class="selector-rol">
+            <div class="titulo-seccion">
+                <div>
+                    <h2>¿Cómo querés ingresar?</h2>
+                    <p>Seleccioná tu perfil para continuar</p>
                 </div>
             </div>
 
-            <button
-                id="btn-tema"
-                class="boton-tema"
-                aria-label="Cambiar tema"
-                title="Cambiar tema"
-            >
-                <i data-lucide="sun"></i>
-            </button>
-        </header>
-
-
-        <!-- =================================
-             PANTALLA DE INICIO
-        ================================== -->
-
-        <section id="pantalla-inicio" class="pantalla activa">
-
-            <div class="portada">
-                <div class="portada-contenido">
-
-                    <span class="etiqueta-portada">
-                        <span class="punto"></span>
-                        SISTEMA DE TORNEOS
-                    </span>
-
-                    <h1>
-                        EL ESPÍRITU<br>
-                        DE LA <span>COMPETICIÓN.</span>
-                    </h1>
-
-                    <p>
-                        Toda la información de tu torneo de Taekwondo ITF
-                        en un solo lugar.
-                    </p>
-
-                    <div class="linea-decorativa"></div>
-
-                </div>
-
-                <div class="portada-decoracion">
-                    <i data-lucide="trophy"></i>
-                    <span>TAEKWONDO ITF</span>
-                </div>
-            </div>
-
-            <div class="selector-rol">
-
-                <div class="titulo-seccion">
-                    <span class="numero-seccion">01</span>
-
-                    <div>
-                        <h2>Bienvenido</h2>
-                        <p>Seleccioná cómo querés ingresar</p>
-                    </div>
-                </div>
-
-                <div class="opciones">
-
-                    <button id="btn-participante" class="boton-rol">
-                        <span class="icono-rol">
-                            <i data-lucide="user-round"></i>
-                        </span>
-
-                        <span class="texto-rol">
-                            <strong>Participante</strong>
-                            <small>Consultá e inscribite al torneo</small>
-                        </span>
-
-                        <i data-lucide="arrow-up-right" class="flecha-rol"></i>
-                    </button>
-
-
-                    <button id="btn-profesor" class="boton-rol">
-                        <span class="icono-rol">
-                            <i data-lucide="users-round"></i>
-                        </span>
-
-                        <span class="texto-rol">
-                            <strong>Profesor</strong>
-                            <small>Gestioná tus alumnos e inscripciones</small>
-                        </span>
-
-                        <i data-lucide="arrow-up-right" class="flecha-rol"></i>
-                    </button>
-
-
-                    <button id="btn-organizador" class="boton-rol">
-                        <span class="icono-rol">
-                            <i data-lucide="shield-check"></i>
-                        </span>
-
-                        <span class="texto-rol">
-                            <strong>Organizador</strong>
-                            <small>Administrá el torneo y sus participantes</small>
-                        </span>
-
-                        <i data-lucide="arrow-up-right" class="flecha-rol"></i>
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================
-             PANTALLA DE PARTICIPANTE
-        ================================== -->
-
-        <section id="pantalla-participante" class="pantalla">
-
-            <div class="encabezado-pantalla">
-                <span class="etiqueta-portada">ÁREA PÚBLICA</span>
-                <h1>Participantes</h1>
-                <p>Consultá la información del torneo o realizá tu inscripción.</p>
-            </div>
-
-            <div class="opciones">
-
-                <button id="btn-ver-participantes" class="boton-rol">
-                    <span class="icono-rol">
-                        <i data-lucide="users-round"></i>
-                    </span>
-
-                    <span class="texto-rol">
-                        <strong>Ver participantes</strong>
-                        <small>Consultá las listas y categorías</small>
-                    </span>
-
+            <div class="opciones opciones-roles">
+                <button class="boton-rol" id="btn-participante" type="button">
+                    <span class="icono-rol"><i data-lucide="user-round"></i></span>
+                    <span class="texto-rol"><strong>Participante</strong><small>Consultá la información del torneo</small></span>
                     <i data-lucide="arrow-up-right" class="flecha-rol"></i>
                 </button>
+                <button class="boton-rol" id="btn-profesor" type="button">
+                    <span class="icono-rol"><i data-lucide="users-round"></i></span>
+                    <span class="texto-rol"><strong>Profesor</strong><small>Gestioná tus alumnos e inscripciones</small></span>
+                    <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+                </button>
+                <button class="boton-rol" id="btn-organizador" type="button">
+                    <span class="icono-rol"><i data-lucide="shield-check"></i></span>
+                    <span class="texto-rol"><strong>Organizador</strong><small>Administrá las áreas del torneo</small></span>
+                    <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+                </button>
+            </div>
+        </div>
+    </section>
 
-                <button id="btn-ver-categorias" class="boton-rol">
-    <span class="icono-rol">
-        <i data-lucide="layers"></i>
-    </span>
+    <!-- PARTICIPANTE -->
+    <section id="pantalla-participante" class="pantalla">
+        <div class="encabezado-pantalla">
+            <span class="etiqueta-portada">ÁREA PÚBLICA</span>
+            <h1>Participantes</h1>
+            <p>Consultá la información del torneo o realizá tu inscripción.</p>
+        </div>
 
+        <div class="opciones opciones-listado">
+            <button class="boton-rol" type="button" id="btn-ver-participantes">
+                <span class="icono-rol"><i data-lucide="users-round"></i></span>
+                <span class="texto-rol"><strong>Ver participantes</strong><small>Consultá la lista de competidores</small></span>
+                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+            </button>
+<button class="boton-rol" type="button" id="btn-ver-categorias">
+    <span class="icono-rol"><i data-lucide="layers"></i></span>
     <span class="texto-rol">
-        <strong>Categorías</strong>
-        <small>Consultá las agrupaciones del torneo</small>
+        <strong>Ver categorías</strong>
+        <small>Explorá las agrupaciones del torneo</small>
     </span>
-
     <i data-lucide="arrow-up-right" class="flecha-rol"></i>
 </button>
-
-                <button id="btn-inscribirme" class="boton-rol">
-                    <span class="icono-rol">
-                        <i data-lucide="clipboard-pen-line"></i>
-                    </span>
-
-                    <span class="texto-rol">
-                        <strong>Inscribirme</strong>
-                        <small>Completá tus datos para participar</small>
-                    </span>
-
-                    <i data-lucide="arrow-up-right" class="flecha-rol"></i>
-                </button>
-
-            </div>
-
-            <button class="btn-volver">
-                <i data-lucide="arrow-left"></i>
-                Volver al inicio
-            </button>
-
-        </section>
-
-
-        <!-- =================================
-             LOGIN DEL PROFESOR
-        ================================== -->
-
-        <section id="pantalla-login-profesor" class="pantalla">
-
-            <div class="encabezado-pantalla">
-                <span class="etiqueta-portada">ACCESO PRIVADO</span>
-                <h1>Área de profesores</h1>
-                <p>Iniciá sesión para gestionar tus alumnos.</p>
-            </div>
-
-            <form id="form-profesor" class="formulario-login">
-
-                <label for="usuario-profesor">Usuario</label>
-
-                <div class="campo-login">
-                    <i data-lucide="user"></i>
-                    <input
-                        type="text"
-                        id="usuario-profesor"
-                        placeholder="Ingresá tu usuario"
-                        autocomplete="username"
-                        required
-                    >
-                </div>
-
-                <label for="password-profesor">Contraseña</label>
-
-                <div class="campo-login">
-                    <i data-lucide="lock"></i>
-                    <input
-                        type="password"
-                        id="password-profesor"
-                        placeholder="Ingresá tu contraseña"
-                        autocomplete="current-password"
-                        required
-                    >
-                </div>
-
-                <button type="submit" class="boton-principal">
-                    Iniciar sesión
-                    <i data-lucide="arrow-right"></i>
-                </button>
-
-            </form>
-
-            <p id="mensaje-profesor" class="mensaje-login"></p>
-
-            <button class="btn-volver">
-                <i data-lucide="arrow-left"></i>
-                Volver
-            </button>
-
-        </section>
-
-
-        <!-- =================================
-             MENÚ DEL PROFESOR
-        ================================== -->
-
-        <section id="pantalla-menu-profesor" class="pantalla">
-
-            <div class="encabezado-pantalla">
-                <span class="etiqueta-portada">PANEL PRIVADO</span>
-                <h1>Panel del profesor</h1>
-                <p>Seleccioná qué querés hacer.</p>
-            </div>
-
-            <div class="opciones">
-
-                <button id="btn-menu-ver-participantes" class="boton-rol">
-                    <span class="icono-rol">
-                        <i data-lucide="users-round"></i>
-                    </span>
-
-                    <span class="texto-rol">
-                        <strong>Ver participantes</strong>
-                        <small>Consultá las inscripciones del torneo</small>
-                    </span>
-
-                    <i data-lucide="arrow-up-right" class="flecha-rol"></i>
-                </button>
-
-                <button id="btn-inscribir-alumnos" class="boton-rol">
-                    <span class="icono-rol">
-                        <i data-lucide="clipboard-pen-line"></i>
-                    </span>
-
-                    <span class="texto-rol">
-                        <strong>Inscribir alumnos</strong>
-                        <small>Registrá nuevos participantes</small>
-                    </span>
-
-                    <i data-lucide="arrow-up-right" class="flecha-rol"></i>
-                </button>
-
-            </div>
-
-            <button class="btn-volver">
-                <i data-lucide="arrow-left"></i>
-                Volver
-            </button>
-
-        </section>
-
-
-        <!-- =================================
-             LOGIN DEL ORGANIZADOR
-        ================================== -->
-
-        <section id="pantalla-login-organizador" class="pantalla">
-
-            <div class="encabezado-pantalla">
-                <span class="etiqueta-portada">ACCESO ADMINISTRATIVO</span>
-                <h1>Área de organización</h1>
-                <p>Ingresá con tu cuenta de organizador.</p>
-            </div>
-
-            <form id="form-organizador" class="formulario-login">
-
-                <label for="usuario-organizador">Usuario</label>
-
-                <div class="campo-login">
-                    <i data-lucide="user"></i>
-                    <input
-                        type="text"
-                        id="usuario-organizador"
-                        placeholder="Ingresá tu usuario"
-                        autocomplete="username"
-                        required
-                    >
-                </div>
-
-                <label for="password-organizador">Contraseña</label>
-
-                <div class="campo-login">
-                    <i data-lucide="lock"></i>
-                    <input
-                        type="password"
-                        id="password-organizador"
-                        placeholder="Ingresá tu contraseña"
-                        autocomplete="current-password"
-                        required
-                    >
-                </div>
-
-                <button type="submit" class="boton-principal">
-                    Iniciar sesión
-                    <i data-lucide="arrow-right"></i>
-                </button>
-
-            </form>
-
-            <p id="mensaje-organizador" class="mensaje-login"></p>
-
-            <button class="btn-volver">
-                <i data-lucide="arrow-left"></i>
-                Volver
-            </button>
-
-        </section>
-
-
-        <!-- =================================
-             MENÚ DEL ORGANIZADOR
-        ================================== -->
-
-        <section id="pantalla-menu-organizador" class="pantalla">
-
-            <div class="encabezado-pantalla">
-                <span class="etiqueta-portada">PANEL ADMINISTRATIVO</span>
-                <h1>Organización</h1>
-                <p>Administrá las distintas áreas del torneo.</p>
-            </div>
-
-            <div class="opciones">
-
-                <button id="btn-administracion" class="boton-rol">
-                    <span class="icono-rol">
-                        <i data-lucide="settings"></i>
-                    </span>
-
-                    <span class="texto-rol">
-                        <strong>Administración</strong>
-                        <small>Configuración y gestión del torneo</small>
-                    </span>
-
-                    <i data-lucide="arrow-up-right" class="flecha-rol"></i>
-                </button>
-
-            </div>
-
-            <button class="btn-volver">
-                <i data-lucide="arrow-left"></i>
-                Volver
-            </button>
-
-        </section>
-
-        <!-- LISTADO PÚBLICO DE PARTICIPANTES -->
-<!-- LISTADO PÚBLICO DE PARTICIPANTES -->
-<section id="pantalla-listado-publico" class="pantalla">
-
-    <div class="encabezado-pantalla">
-        <span class="etiqueta-portada">TORNEO ITF</span>
-        <h1>Participantes</h1>
-        <p>Listado de competidores inscriptos.</p>
-    </div>
-
-    <button class="btn-volver" type="button">
-        <i data-lucide="arrow-left"></i>
-        Volver
-    </button>
-
-    <div class="panel-listado">
-
-        <div class="herramientas-listado">
-
-            <div class="campo-buscador">
-                <i data-lucide="search"></i>
-                <input
-                    type="search"
-                    id="buscar-participante"
-                    placeholder="Buscar por nombre o apellido..."
-                >
-            </div>
-
-            <div class="filtros-listado">
-                <select id="filtro-profesor">
-                    <option value="">Todos los profesores</option>
-                </select>
-            </div>
-
-        </div>
-
-        <div class="resumen-listado">
-            <span id="cantidad-participantes">Cargando participantes...</span>
-        </div>
-
-        <div id="estado-listado" class="estado-listado">
-            Cargando listado...
-        </div>
-
-        <div class="tabla-contenedor" id="contenedor-tabla" hidden>
-
-            <table class="tabla-participantes">
-
-                <thead>
-                    <tr>
-                        <th>Participante</th>
-                        <th>Edad</th>
-                        <th>Graduación</th>
-                        <th>Profesor</th>
-                    </tr>
-                </thead>
-
-                <tbody id="cuerpo-tabla-participantes"></tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- =================================
-     CATEGORÍAS DEL TORNEO
-================================== -->
-
-<section id="pantalla-categorias" class="pantalla">
-
-    <div class="encabezado-pantalla">
-        <span class="etiqueta-portada">TORNEO ITF</span>
-        <h1>Categorías</h1>
-        <p>Agrupaciones de participantes por modalidad.</p>
-    </div>
-
-    <button class="btn-volver" type="button">
-        <i data-lucide="arrow-left"></i>
-        Volver
-    </button>
-
-    <div class="resumen-listado">
-        <span id="cantidad-categorias">Cargando categorías...</span>
-    </div>
-
-    <div id="estado-categorias" class="estado-listado">
-        Cargando categorías...
-    </div>
-
-    <div id="contenedor-categorias" class="lista-categorias"></div>
-
-</section>
-
-
-<!-- =================================
-     MODAL DE DETALLE DE CATEGORÍA
-================================== -->
-
-<div id="modal-categoria" class="modal-ficha" hidden>
-
-    <div
-        class="modal-ficha-contenedor modal-categoria-contenedor"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="titulo-modal-categoria"
-    >
-
-        <div class="modal-ficha-barra">
-
-            <div>
-                <span class="etiqueta-portada">TORNEO ITF</span>
-                <h2 id="titulo-modal-categoria">Categoría</h2>
-            </div>
-
-            <button
-                id="btn-cerrar-categoria"
-                class="modal-ficha-cerrar"
-                type="button"
-                aria-label="Cerrar categoría"
-            >
-                <i data-lucide="x"></i>
-            </button>
-
-        </div>
-
-        <div id="contenido-modal-categoria"></div>
-
-    </div>
-
-</div>
-
-<!-- =================================
-     VENTANA EMERGENTE DEL PARTICIPANTE
-================================== -->
-
-<div
-    id="modal-ficha-publica"
-    class="modal-ficha"
-    hidden
-    role="presentation"
->
-    <div
-        class="modal-ficha-contenedor"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="titulo-modal-ficha"
-    >
-
-        <div class="modal-ficha-barra">
-            <div>
-                <span class="etiqueta-portada">TORNEO ITF</span>
-                <h2 id="titulo-modal-ficha">Ficha del participante</h2>
-            </div>
-
-            <button
-                id="btn-cerrar-ficha"
-                class="modal-ficha-cerrar"
-                type="button"
-                aria-label="Cerrar ficha"
-                title="Cerrar"
-            >
-                <i data-lucide="x"></i>
+            <button class="boton-rol" type="button" data-destino-provisional>
+                <span class="icono-rol"><i data-lucide="git-branch"></i></span>
+                <span class="texto-rol"><strong>Ver llaves</strong><small>Consultá los cuadros de competencia</small></span>
+                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
             </button>
         </div>
 
-        <div id="contenido-ficha-publica"></div>
-
-    </div>
-</div>
-
-        <!-- =================================
-             PANTALLA PROVISIONAL
-        ================================== -->
-
-        <section id="pantalla-provisional" class="pantalla">
-
-            <div class="encabezado-pantalla">
-                <span class="etiqueta-portada">PRÓXIMAMENTE</span>
-                <h1>Estamos trabajando</h1>
-                <p id="texto-provisional"></p>
-            </div>
-
-            <button class="btn-volver">
-                <i data-lucide="arrow-left"></i>
-                Volver
+        <div class="grupo-opciones grupo-acciones">
+            <button class="boton-rol" type="button">
+                <span class="icono-rol"><i data-lucide="user-plus"></i></span>
+                <span class="texto-rol"><strong>Inscribirme</strong><small>Próximamente</small></span>
+                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
             </button>
+        </div>
 
-        </section>
+        <button class="btn-volver" type="button" data-volver><i data-lucide="arrow-left"></i> Volver al inicio</button>
+    </section>
 
+    <!-- LOGIN PROFESOR -->
+    <section id="pantalla-login-profesor" class="pantalla">
+        <div class="encabezado-pantalla">
+            <span class="etiqueta-portada">ACCESO PRIVADO</span>
+            <h1>Área de profesores</h1>
+            <p>Iniciá sesión para gestionar tus alumnos.</p>
+        </div>
 
-        <!-- PIE DE PÁGINA -->
-        <footer class="pie-pagina">
-            <span>TORNEO ITF</span>
-            <span>TAEKWONDO · DISCIPLINA · COMPETICIÓN</span>
-        </footer>
+        <form id="form-profesor" class="formulario-login">
+            <label for="usuario-profesor">Usuario</label>
+            <div class="campo-login"><i data-lucide="user"></i><input type="text" id="usuario-profesor" placeholder="Ingresá tu usuario" autocomplete="username" required></div>
+            <label for="password-profesor">Contraseña</label>
+            <div class="campo-login"><i data-lucide="lock"></i><input type="password" id="password-profesor" placeholder="Ingresá tu contraseña" autocomplete="current-password" required></div>
+            <button type="submit" class="boton-principal">Iniciar sesión <i data-lucide="arrow-right"></i></button>
+            <p id="mensaje-profesor" class="mensaje-login" role="status" aria-live="polite"></p>
+        </form>
+        <button class="btn-volver" type="button" data-volver><i data-lucide="arrow-left"></i> Volver</button>
+    </section>
 
-    </main>
+    <!-- MENÚ PROFESOR -->
+    <section id="pantalla-menu-profesor" class="pantalla">
+        <div class="encabezado-pantalla">
+            <span class="etiqueta-portada">PANEL PRIVADO</span>
+            <h1>Panel del profesor</h1>
+            <p id="saludo-profesor">Seleccioná qué querés hacer.</p>
+        </div>
 
+        <div class="opciones opciones-listado">
+            <button class="boton-rol" type="button" data-destino-provisional>
+                <span class="icono-rol"><i data-lucide="users-round"></i></span>
+                <span class="texto-rol"><strong>Ver participantes</strong><small>Consultá las inscripciones del torneo</small></span>
+                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+            </button>
+            <button class="boton-rol" type="button" data-destino-provisional>
+                <span class="icono-rol"><i data-lucide="layers"></i></span>
+                <span class="texto-rol"><strong>Ver categorías</strong><small>Consultá las agrupaciones del torneo</small></span>
+                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+            </button>
+            <button class="boton-rol" type="button" data-destino-provisional>
+                <span class="icono-rol"><i data-lucide="git-branch"></i></span>
+                <span class="texto-rol"><strong>Ver llaves</strong><small>Consultá los cuadros de competencia</small></span>
+                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+            </button>
+        </div>
 
-    <!-- ICONOS -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+        <div class="grupo-opciones grupo-acciones">
+            <button class="boton-rol" type="button">
+                <span class="icono-rol"><i data-lucide="user-plus"></i></span>
+                <span class="texto-rol"><strong>Inscribirme</strong><small>Registrá tu participación</small></span>
+                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+            </button>
+            <button class="boton-rol" type="button">
+                <span class="icono-rol"><i data-lucide="clipboard-pen-line"></i></span>
+                <span class="texto-rol"><strong>Inscribir a mis alumnos</strong><small>Registrá alumnos de tu escuela</small></span>
+                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+            </button>
+        </div>
+        <button class="btn-volver" type="button" data-volver><i data-lucide="arrow-left"></i> Volver</button>
+    </section>
 
-    <!-- SUPABASE -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <!-- LOGIN ORGANIZADOR -->
+    <section id="pantalla-login-organizador" class="pantalla">
+        <div class="encabezado-pantalla">
+            <span class="etiqueta-portada">ACCESO ADMINISTRATIVO</span>
+            <h1>Área de organización</h1>
+            <p>Ingresá con tu cuenta de organizador.</p>
+        </div>
 
-    <script>
-        lucide.createIcons();
-    </script>
+        <form id="form-organizador" class="formulario-login">
+            <label for="usuario-organizador">Usuario</label>
+            <div class="campo-login"><i data-lucide="user"></i><input type="text" id="usuario-organizador" placeholder="Ingresá tu usuario" autocomplete="username" required></div>
+            <label for="password-organizador">Contraseña</label>
+            <div class="campo-login"><i data-lucide="lock"></i><input type="password" id="password-organizador" placeholder="Ingresá tu contraseña" autocomplete="current-password" required></div>
+            <button type="submit" class="boton-principal">Iniciar sesión <i data-lucide="arrow-right"></i></button>
+            <p id="mensaje-organizador" class="mensaje-login" role="status" aria-live="polite"></p>
+        </form>
+        <button class="btn-volver" type="button" data-volver><i data-lucide="arrow-left"></i> Volver</button>
+    </section>
 
-    <!-- LÓGICA DE LA APLICACIÓN -->
-    <script src="script.js"></script>
+    <!-- MENÚ ORGANIZADOR -->
+    <section id="pantalla-menu-organizador" class="pantalla">
+        <div class="encabezado-pantalla">
+            <span class="etiqueta-portada">PANEL ADMINISTRATIVO</span>
+            <h1>Organización</h1>
+            <p id="saludo-organizador">Administrá las distintas áreas del torneo.</p>
+        </div>
 
+        <div class="opciones opciones-listado">
+            <button class="boton-rol" type="button" data-destino-provisional>
+                <span class="icono-rol"><i data-lucide="users-round"></i></span>
+                <span class="texto-rol"><strong>Ver participantes</strong><small>Consultá las inscripciones del torneo</small></span>
+                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+            </button>
+            <button class="boton-rol" type="button" data-destino-provisional>
+                <span class="icono-rol"><i data-lucide="layers"></i></span>
+                <span class="texto-rol"><strong>Ver categorías</strong><small>Consultá las agrupaciones del torneo</small></span>
+                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+            </button>
+            <button class="boton-rol" type="button" data-destino-provisional>
+                <span class="icono-rol"><i data-lucide="git-branch"></i></span>
+                <span class="texto-rol"><strong>Ver llaves</strong><small>Consultá los cuadros de competencia</small></span>
+                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+            </button>
+        </div>
+
+        <div class="grupo-opciones grupo-acciones">
+            <button class="boton-rol" type="button">
+                <span class="icono-rol"><i data-lucide="clipboard-pen-line"></i></span>
+                <span class="texto-rol"><strong>Inscribir a mis alumnos</strong><small>Registrar participantes en el torneo</small></span>
+                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+            </button>
+        </div>
+
+        <div class="grupo-opciones grupo-configuracion">
+            <button class="boton-rol" type="button">
+                <span class="icono-rol"><i data-lucide="settings"></i></span>
+                <span class="texto-rol"><strong>Configuración</strong><small>Administración y ajustes del torneo</small></span>
+                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+            </button>
+        </div>
+        <button class="btn-volver" type="button" data-volver><i data-lucide="arrow-left"></i> Volver</button>
+    </section>
+
+    <footer class="pie-pagina">
+        <span>General San Martín</span>
+        <span>TAEKWONDO</span>
+    </footer>
+</main>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

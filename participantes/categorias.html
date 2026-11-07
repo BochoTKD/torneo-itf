@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111111">
+
+    <title>Categorías · Torneo General San Martín</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="app">
+
+        <header class="encabezado">
+            <a class="marca" href="../" aria-label="Volver al inicio">
+                <div class="marca-icono">
+                    <i data-lucide="trophy"></i>
+                </div>
+
+                <div class="marca-texto">
+                    <strong>Torneo · General San Martín</strong>
+                    <span>PLATAFORMA DE COMPETICIÓN</span>
+                </div>
+            </a>
+
+            <button
+                id="btn-tema"
+                class="boton-tema"
+                type="button"
+                aria-label="Cambiar a tema claro"
+                title="Cambiar tema"
+            >
+                <i data-lucide="sun"></i>
+            </button>
+        </header>
+
+        <main>
+            <section id="pantalla-categorias" class="pantalla activa">
+                <div class="encabezado-pantalla">
+                    <span class="etiqueta-portada">TORNEO ITF</span>
+                    <h1>Categorías</h1>
+                    <p>Agrupaciones de participantes por modalidad.</p>
+                </div>
+
+                <button class="btn-volver" id="btn-volver" type="button">
+                    <i data-lucide="arrow-left"></i>
+                    Volver
+                </button>
+
+                <div class="resumen-listado">
+                    <span id="cantidad-categorias">Cargando categorías...</span>
+                </div>
+
+                <div
+                    id="estado-categorias"
+                    class="estado-listado"
+                    role="status"
+                    aria-live="polite"
+                >
+                    Cargando categorías...
+                </div>
+
+                <div id="contenedor-categorias" class="lista-categorias"></div>
+            </section>
+        </main>
+
+        <footer class="pie-pagina">
+            <span>General San Martín</span>
+            <span>TAEKWONDO</span>
+        </footer>
+    </div>
+
+    <!-- MODAL DE CATEGORÍA -->
+    <div id="modal-categoria" class="modal-ficha" hidden role="presentation">
+        <div
+            class="modal-ficha-contenedor modal-categoria-contenedor"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="titulo-modal-categoria"
+        >
+            <div class="modal-ficha-barra">
+                <div>
+                    <span class="etiqueta-portada">TORNEO ITF</span>
+                    <h2 id="titulo-modal-categoria">Categoría</h2>
+                </div>
+
+                <button
+                    id="btn-cerrar-categoria"
+                    class="modal-ficha-cerrar"
+                    type="button"
+                    aria-label="Cerrar categoría"
+                    title="Cerrar"
+                >
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+
+            <div id="contenido-modal-categoria"></div>
+        </div>
+    </div>
+
+    <!-- FICHA INDIVIDUAL, COMPARTIDA CON EL LISTADO -->
+    <div id="modal-ficha-publica" class="modal-ficha" hidden role="presentation">
+        <div
+            class="modal-ficha-contenedor"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="titulo-modal-ficha"
+        >
+            <div class="modal-ficha-barra">
+                <div>
+                    <span class="etiqueta-portada">SISTEMA DE TORNEOS</span>
+                    <h2 id="titulo-modal-ficha">Ficha del participante</h2>
+                </div>
+
+                <button
+                    id="btn-cerrar-ficha"
+                    class="modal-ficha-cerrar"
+                    type="button"
+                    aria-label="Cerrar ficha"
+                    title="Cerrar"
+                >
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+
+            <div id="contenido-ficha-publica"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="script.js"></script>
+</body>
+</html>
