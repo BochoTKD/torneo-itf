@@ -437,6 +437,10 @@ select option { color: #222; background-color: #fff; }
 
 .boton-ficha-secundario {
     min-height: 39px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     padding: 9px 12px;
     color: var(--texto);
     background: transparent;
@@ -900,4 +904,19 @@ a:focus-visible {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
     }
+}
+
+.filtros-listado {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.filtros-listado select {
+    flex: 1;
+    min-width: 0;
+}
+
+#btn-actualizar-participantes {
+    flex-shrink: 0;
 }

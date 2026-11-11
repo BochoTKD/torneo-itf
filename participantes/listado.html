@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -26,7 +27,6 @@
         <header class="encabezado">
 
             <a class="marca" href="../" aria-label="Volver al inicio">
-
                 <div class="marca-icono">
                     <i data-lucide="trophy"></i>
                 </div>
@@ -35,7 +35,6 @@
                     <strong>Torneo · General San Martín</strong>
                     <span>PLATAFORMA DE COMPETICIÓN</span>
                 </div>
-
             </a>
 
             <button
@@ -50,33 +49,26 @@
 
         </header>
 
-
         <!-- LISTADO PÚBLICO DE PARTICIPANTES -->
         <main>
 
             <section id="pantalla-listado-publico" class="pantalla activa">
 
                 <div class="encabezado-pantalla">
-
                     <h1>Participantes</h1>
-
                     <p>Listado de competidores inscriptos.</p>
-
                 </div>
 
-
                 <button class="btn-volver" id="btn-volver" type="button">
-    <i data-lucide="arrow-left"></i>
-    Volver
-</button>
-
+                    <i data-lucide="arrow-left"></i>
+                    Volver
+                </button>
 
                 <div class="panel-listado">
 
                     <div class="herramientas-listado">
 
                         <div class="campo-buscador">
-
                             <i data-lucide="search"></i>
 
                             <input
@@ -86,9 +78,7 @@
                                 autocomplete="off"
                                 aria-label="Buscar participante"
                             >
-
                         </div>
-
 
                         <div class="filtros-listado">
 
@@ -99,17 +89,25 @@
                                 <option value="">Todos los profesores</option>
                             </select>
 
+                            <button
+                                id="btn-actualizar-participantes"
+                                class="boton-ficha-secundario"
+                                type="button"
+                                title="Actualizar listado"
+                            >
+                                <i data-lucide="refresh-cw"></i>
+                                Actualizar
+                            </button>
+
                         </div>
 
                     </div>
-
 
                     <div class="resumen-listado">
                         <span id="cantidad-participantes">
                             Cargando participantes...
                         </span>
                     </div>
-
 
                     <div
                         id="estado-listado"
@@ -119,7 +117,6 @@
                     >
                         Cargando listado...
                     </div>
-
 
                     <div
                         class="tabla-contenedor"
@@ -150,15 +147,13 @@
 
         </main>
 
-
         <!-- PIE DE PÁGINA -->
-    <footer class="pie-pagina">
-        <span>General San Martín</span>
-        <span>TAEKWONDO</span>
-    </footer>
+        <footer class="pie-pagina">
+            <span>General San Martín</span>
+            <span>TAEKWONDO</span>
+        </footer>
 
     </div>
-
 
     <!-- FICHA EMERGENTE DEL PARTICIPANTE -->
     <div
@@ -200,6 +195,44 @@
 
     </div>
 
+    <!-- MODAL DE CATEGORÍA -->
+    <div
+        id="modal-categoria"
+        class="modal-ficha"
+        hidden
+        role="presentation"
+    >
+
+        <div
+            class="modal-ficha-contenedor modal-categoria-contenedor"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="titulo-modal-categoria"
+        >
+
+            <div class="modal-ficha-barra">
+
+                <div>
+                    <h2 id="titulo-modal-categoria">Categoría</h2>
+                </div>
+
+                <button
+                    id="btn-cerrar-categoria"
+                    class="modal-ficha-cerrar"
+                    type="button"
+                    aria-label="Cerrar categoría"
+                    title="Cerrar"
+                >
+                    <i data-lucide="x"></i>
+                </button>
+
+            </div>
+
+            <div id="contenido-modal-categoria"></div>
+
+        </div>
+
+    </div>
 
     <!-- LIBRERÍAS -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

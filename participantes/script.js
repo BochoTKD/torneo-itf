@@ -12,6 +12,36 @@ const supabaseClient = window.supabase.createClient(
 
 
 // =========================================
+// 1.1. PAGINACIÓN DE CONSULTAS RPC
+// =========================================
+
+async function consultarTodasLasFilasRPC(nombreFuncion, tamanoPagina = 500) {
+    const todosLosRegistros = [];
+    let desde = 0;
+
+    while (true) {
+        const hasta = desde + tamanoPagina - 1;
+
+        const { data, error } = await supabaseClient
+            .rpc(nombreFuncion)
+            .range(desde, hasta);
+
+        if (error) throw error;
+
+        const pagina = data || [];
+
+        todosLosRegistros.push(...pagina);
+
+        if (pagina.length < tamanoPagina) break;
+
+        desde += tamanoPagina;
+    }
+
+    return todosLosRegistros;
+}
+
+
+// =========================================
 // 2. SELECTOR DE TEMA (COMPARTIDO)
 // =========================================
 
@@ -48,6 +78,7 @@ if (botonTema) {
         aplicarTema();
     });
 }
+
 aplicarTema();
 
 
@@ -63,6 +94,10 @@ const cuerpoTabla = document.getElementById("cuerpo-tabla-participantes");
 const estadoListado = document.getElementById("estado-listado");
 const contenedorTabla = document.getElementById("contenedor-tabla");
 const cantidadParticipantes = document.getElementById("cantidad-participantes");
+
+const botonActualizarParticipantes = document.getElementById(
+    "btn-actualizar-participantes"
+);
 
 const contenidoFicha = document.getElementById("contenido-ficha-publica");
 const modalFicha = document.getElementById("modal-ficha-publica");
@@ -83,6 +118,8 @@ const botonCerrarCategoria = document.getElementById("btn-cerrar-categoria");
 let categoriasPublicas = [];
 let categoriaAbierta = null;
 let elementoQueAbrioCategoria = null;
+
+let cargandoParticipantes = false;
 
 const esPaginaListado = Boolean(buscarParticipante && cuerpoTabla);
 const esPaginaCategorias = Boolean(contenedorCategorias);
@@ -156,15 +193,14 @@ function obtenerDatosParticipante(registro) {
 // 5. UNIFICAR FILAS POR PARTICIPANTE
 // =========================================
 
-// La RPC puede devolver una fila por modalidad.
-// Se conserva una sola persona y se acumulan sus modalidades.
-
 function quitarParticipantesDuplicados(lista) {
     const unicos = new Map();
 
     (lista || []).forEach(registro => {
         const p = obtenerDatosParticipante(registro);
 
+        // La nueva RPC pública devuelve el ID real de la inscripción.
+        // Todas las modalidades de una persona se agrupan bajo ese ID.
         const clave = p.id || [
             normalizar(p.nombre),
             normalizar(p.apellido),
@@ -238,12 +274,32 @@ function cerrarFichaParticipante() {
     if (!modalFicha) return;
 
     modalFicha.hidden = true;
+
+    if (modalCategoria && !modalCategoria.hidden) {
+        modalFicha.style.zIndex = "1001";
+    } else {
+        modalFicha.style.removeProperty("z-index");
+    }
+
     actualizarEstadoModales();
 
     if (elementoQueAbrioFicha && elementoQueAbrioFicha.isConnected) {
         elementoQueAbrioFicha.focus();
     }
+
     elementoQueAbrioFicha = null;
+}
+
+function buscarCategoriaModalidad(modalidad) {
+    const modalidadNormalizada = normalizar(modalidad.modalidad);
+    const categoriaId = modalidad.categoria_id || "sin-categoria";
+    const subdivision = obtenerLetraSubdivision(modalidad);
+
+    return categoriasPublicas.find(categoria =>
+        String(categoria.categoriaId) === String(categoriaId) &&
+        categoria.modalidadNormalizada === modalidadNormalizada &&
+        categoria.subdivision === subdivision
+    );
 }
 
 function abrirFichaParticipante(registro) {
@@ -260,6 +316,7 @@ function abrirFichaParticipante(registro) {
 
     const claseAvatar = esFemenino ? "femenino" : "masculino";
     const rol = p.esProfesor ? "Participante · Profesor" : "Participante";
+
     const etiquetaInvitado = p.invitado
         ? '<span class="etiqueta-invitado">INVITADO</span>'
         : "";
@@ -276,8 +333,9 @@ function abrirFichaParticipante(registro) {
         return ordenA - ordenB;
     });
 
-    const tarjetasModalidades = modalidades.map(modalidad => {
+    const tarjetasModalidades = modalidades.map((modalidad, indice) => {
         const nombreModalidad = escaparHTML(modalidad.modalidad);
+
         const horario = modalidad.horario
             ? escaparHTML(modalidad.horario)
             : "Horario pendiente de vincular";
@@ -285,10 +343,21 @@ function abrirFichaParticipante(registro) {
         return `
             <article class="tarjeta-modalidad">
                 <h3>${nombreModalidad}</h3>
+
                 <p class="modalidad-horario">
                     <strong>Horario:</strong> ${horario}
                 </p>
+
                 <div class="modalidad-acciones">
+
+                    <button
+                        type="button"
+                        class="boton-ficha-secundario btn-ver-categoria"
+                        data-indice-modalidad="${indice}"
+                    >
+                        Ver categoría
+                    </button>
+
                     <button
                         type="button"
                         class="boton-ficha-secundario"
@@ -297,6 +366,7 @@ function abrirFichaParticipante(registro) {
                     >
                         Ver llave
                     </button>
+
                 </div>
             </article>
         `;
@@ -304,28 +374,36 @@ function abrirFichaParticipante(registro) {
 
     contenidoFicha.innerHTML = `
         <article class="ficha-participante">
+
             <div class="ficha-encabezado">
+
                 <div class="ficha-avatar ${claseAvatar}">
                     <i data-lucide="user-round"></i>
                 </div>
+
                 <div class="ficha-identidad">
                     <h2>${escaparHTML(p.nombre)} ${escaparHTML(p.apellido)}</h2>
                     <p class="ficha-rol">${rol}</p>
                 </div>
+
                 ${etiquetaInvitado}
+
             </div>
 
             <div class="ficha-separador"></div>
 
             <div class="ficha-datos-basicos">
+
                 <div class="ficha-dato">
                     <small>Edad</small>
                     <strong>${p.edad !== "" ? escaparHTML(p.edad) + " años" : "—"}</strong>
                 </div>
+
                 <div class="ficha-dato">
                     <small>Género</small>
                     <strong>${escaparHTML(p.genero) || "—"}</strong>
                 </div>
+
             </div>
 
             <div class="ficha-separador"></div>
@@ -333,14 +411,17 @@ function abrirFichaParticipante(registro) {
             <h3 class="ficha-titulo-seccion">Datos generales</h3>
 
             <div class="ficha-datos-generales">
+
                 <div class="ficha-dato">
                     <small>Graduación</small>
                     <strong>${escaparHTML(p.graduacion) || "—"}</strong>
                 </div>
+
                 <div class="ficha-dato">
                     <small>Profesor</small>
                     <strong class="ficha-profesor">${escaparHTML(p.profesor) || "—"}</strong>
                 </div>
+
             </div>
 
             <div class="ficha-separador"></div>
@@ -357,10 +438,36 @@ function abrirFichaParticipante(registro) {
                 Preferiblemente, venir un poco antes.
                 Los horarios son estimados y pueden sufrir demoras.
             </p>
+
         </article>
     `;
 
+    contenidoFicha
+        .querySelectorAll(".btn-ver-categoria")
+        .forEach(boton => {
+            const indice = Number(boton.dataset.indiceModalidad);
+            const modalidad = modalidades[indice];
+            const categoria = buscarCategoriaModalidad(modalidad);
+
+            if (!categoria) {
+                boton.disabled = true;
+                boton.title = "Esta categoría todavía no está publicada";
+                return;
+            }
+
+            boton.addEventListener("click", () => {
+                abrirDetalleCategoria(categoria, boton);
+            });
+        });
+
+    if (modalCategoria && !modalCategoria.hidden) {
+        modalFicha.style.zIndex = "1003";
+    } else {
+        modalFicha.style.removeProperty("z-index");
+    }
+
     modalFicha.hidden = false;
+
     actualizarEstadoModales();
     refrescarIconos();
 
@@ -417,6 +524,7 @@ function dibujarParticipantes(lista) {
         fila.classList.add("fila-participante");
         fila.tabIndex = 0;
         fila.setAttribute("role", "button");
+
         fila.setAttribute(
             "aria-label",
             `Ver ficha de ${participante.nombre} ${participante.apellido}`
@@ -427,15 +535,18 @@ function dibujarParticipantes(lista) {
             "Participante",
             `${participante.apellido}, ${participante.nombre}`
         );
+
         crearCelda(
             fila,
             "Edad",
             participante.edad !== "" ? `${participante.edad} años` : "—"
         );
+
         crearCelda(fila, "Graduación", participante.graduacion);
         crearCelda(fila, "Profesor", participante.profesor);
 
         fila.addEventListener("click", () => abrirFichaParticipante(registro));
+
         fila.addEventListener("keydown", evento => {
             if (evento.key === "Enter" || evento.key === " ") {
                 evento.preventDefault();
@@ -469,6 +580,8 @@ function aplicarFiltrosParticipantes() {
 function cargarFiltroProfesores() {
     if (!filtroProfesor) return;
 
+    const profesorAnterior = filtroProfesor.value;
+
     const profesores = [
         ...new Set(
             participantesPublicos
@@ -482,6 +595,7 @@ function cargarFiltroProfesores() {
     const opcionTodos = document.createElement("option");
     opcionTodos.value = "";
     opcionTodos.textContent = "Todos los profesores";
+
     filtroProfesor.appendChild(opcionTodos);
 
     profesores.forEach(profesor => {
@@ -490,11 +604,18 @@ function cargarFiltroProfesores() {
         opcion.textContent = profesor;
         filtroProfesor.appendChild(opcion);
     });
+
+    const existeProfesor = [...filtroProfesor.options].some(
+        opcion => opcion.value === profesorAnterior
+    );
+
+    filtroProfesor.value = existeProfesor ? profesorAnterior : "";
 }
 
 if (buscarParticipante) {
     buscarParticipante.addEventListener("input", aplicarFiltrosParticipantes);
 }
+
 if (filtroProfesor) {
     filtroProfesor.addEventListener("change", aplicarFiltrosParticipantes);
 }
@@ -534,15 +655,19 @@ function nombreEdadCategoria(valor) {
 
 function nombreGeneroCategoria(valor) {
     const genero = normalizar(valor);
+
     if (genero.includes("fem") || genero === "f") return "Femenino";
     if (genero.includes("masc") || genero === "m") return "Masculino";
+
     return String(valor || "Género sin especificar");
 }
 
 function ordenGeneroCategoria(valor) {
     const genero = normalizar(valor);
+
     if (genero.includes("fem") || genero === "f") return 1;
     if (genero.includes("masc") || genero === "m") return 2;
+
     return 3;
 }
 
@@ -561,8 +686,17 @@ function ordenDivisionCinturon(valor) {
     if (texto.includes("rojo")) return 9;
 
     const danes = texto.match(/\b(i{1,3}|iv|v|vi)\s*dan\b/);
+
     if (danes) {
-        const valores = { i: 11, ii: 12, iii: 13, iv: 14, v: 15, vi: 16 };
+        const valores = {
+            i: 11,
+            ii: 12,
+            iii: 13,
+            iv: 14,
+            v: 15,
+            vi: 16
+        };
+
         return valores[danes[1]] || 99;
     }
 
@@ -578,7 +712,10 @@ function ordenDivisionCinturon(valor) {
 
 function obtenerValorPeso(valor) {
     const coincidencia = String(valor || "").match(/\d+(?:[.,]\d+)?/);
-    return coincidencia ? Number(coincidencia[0].replace(",", ".")) : 999;
+
+    return coincidencia
+        ? Number(coincidencia[0].replace(",", "."))
+        : 999;
 }
 
 function obtenerLetraSubdivision(modalidad) {
@@ -590,6 +727,7 @@ function obtenerLetraSubdivision(modalidad) {
     ]);
 
     const coincidencia = String(valor || "").match(/\b([A-Z])\b/i);
+
     return coincidencia ? coincidencia[1].toUpperCase() : "";
 }
 
@@ -653,6 +791,7 @@ function generarCategoriasPublicas(participantes) {
             }
 
             const categoria = agrupadas.get(clave);
+
             const participanteId = p.id || [
                 normalizar(p.nombre),
                 normalizar(p.apellido),
@@ -672,19 +811,25 @@ function generarCategoriasPublicas(participantes) {
             participantes: [...categoria.participantes.values()]
         }))
         .sort((a, b) => {
-            const modalidad = (ordenModalidades[a.modalidadNormalizada] || 99) -
+            const modalidad =
+                (ordenModalidades[a.modalidadNormalizada] || 99) -
                 (ordenModalidades[b.modalidadNormalizada] || 99);
+
             if (modalidad) return modalidad;
 
             const edad = obtenerNumeroEdad(a.edad) - obtenerNumeroEdad(b.edad);
             if (edad) return edad;
 
-            const cinturon = ordenDivisionCinturon(a.division) -
+            const cinturon =
+                ordenDivisionCinturon(a.division) -
                 ordenDivisionCinturon(b.division);
+
             if (cinturon) return cinturon;
 
-            const genero = ordenGeneroCategoria(a.genero) -
+            const genero =
+                ordenGeneroCategoria(a.genero) -
                 ordenGeneroCategoria(b.genero);
+
             if (genero) return genero;
 
             const peso = obtenerValorPeso(a.peso) - obtenerValorPeso(b.peso);
@@ -696,6 +841,7 @@ function generarCategoriasPublicas(participantes) {
 
 function obtenerNumeroEdad(valor) {
     const coincidencia = String(valor || "").match(/\d+/);
+
     return coincidencia ? Number(coincidencia[0]) : 999;
 }
 
@@ -711,7 +857,9 @@ function dibujarCategorias() {
 
     cantidadCategorias.textContent =
         `${categoriasPublicas.length} ${
-            categoriasPublicas.length === 1 ? "categoría publicada" : "categorías publicadas"
+            categoriasPublicas.length === 1
+                ? "categoría publicada"
+                : "categorías publicadas"
         }`;
 
     if (categoriasPublicas.length === 0) {
@@ -735,13 +883,21 @@ function dibujarCategorias() {
 
         const encabezado = document.createElement("div");
         encabezado.className = "encabezado-grupo-categorias";
+
         encabezado.innerHTML = `
             <h2>${escaparHTML(
-                modalidad === "tul" ? "Tul" :
-                modalidad === "media lucha" ? "Media lucha" : "Combate"
+                modalidad === "tul"
+                    ? "Tul"
+                    : modalidad === "media lucha"
+                        ? "Media lucha"
+                        : "Combate"
             )}</h2>
-            <span>${categorias.length} ${categorias.length === 1 ? "categoría" : "categorías"}</span>
+
+            <span>${categorias.length} ${
+                categorias.length === 1 ? "categoría" : "categorías"
+            }</span>
         `;
+
         seccion.appendChild(encabezado);
 
         const grilla = document.createElement("div");
@@ -749,19 +905,34 @@ function dibujarCategorias() {
 
         categorias.forEach(categoria => {
             const tarjeta = document.createElement("button");
+
             tarjeta.type = "button";
             tarjeta.className = "tarjeta-categoria";
+
             tarjeta.innerHTML = `
                 <span class="tarjeta-categoria-contenido">
-                    <span class="tarjeta-categoria-titulo">${escaparHTML(categoria.titulo)}</span>
+                    <span class="tarjeta-categoria-titulo">
+                        ${escaparHTML(categoria.titulo)}
+                    </span>
+
                     <span class="tarjeta-categoria-cantidad">
                         ${categoria.participantes.length}
-                        ${categoria.participantes.length === 1 ? "participante" : "participantes"}
+                        ${categoria.participantes.length === 1
+                            ? "participante"
+                            : "participantes"}
                     </span>
                 </span>
-                <span class="tarjeta-categoria-icono"><i data-lucide="arrow-up-right"></i></span>
+
+                <span class="tarjeta-categoria-icono">
+                    <i data-lucide="arrow-up-right"></i>
+                </span>
             `;
-            tarjeta.addEventListener("click", () => abrirDetalleCategoria(categoria, tarjeta));
+
+            tarjeta.addEventListener(
+                "click",
+                () => abrirDetalleCategoria(categoria, tarjeta)
+            );
+
             grilla.appendChild(tarjeta);
         });
 
@@ -792,29 +963,45 @@ function abrirDetalleCategoria(categoria, elemento) {
 
     contenidoModalCategoria.innerHTML = `
         <div class="detalle-categoria">
+
             <div class="detalle-categoria-resumen">
-                <span class="detalle-categoria-modalidad">${escaparHTML(categoria.modalidad)}</span>
+                <span class="detalle-categoria-modalidad">
+                    ${escaparHTML(categoria.modalidad)}
+                </span>
+
                 <span>${participantesOrdenados.length} participantes</span>
             </div>
 
             <div class="lista-participantes-categoria">
+
                 ${participantesOrdenados.map((registro, indice) => {
                     const p = obtenerDatosParticipante(registro);
+
                     return `
                         <button
                             type="button"
                             class="fila-participante-categoria"
                             data-indice="${indice}"
                         >
-                            <span class="numero-participante">${String(indice + 1).padStart(2, "0")}</span>
-                            <span class="datos-participante-categoria">
-                                <strong>${escaparHTML(p.apellido)}, ${escaparHTML(p.nombre)}</strong>
-                                <small>${escaparHTML(p.graduacion || "Graduación sin especificar")}</small>
+                            <span class="numero-participante">
+                                ${String(indice + 1).padStart(2, "0")}
                             </span>
+
+                            <span class="datos-participante-categoria">
+                                <strong>
+                                    ${escaparHTML(p.apellido)}, ${escaparHTML(p.nombre)}
+                                </strong>
+
+                                <small>
+                                    ${escaparHTML(p.graduacion || "Graduación sin especificar")}
+                                </small>
+                            </span>
+
                             <i data-lucide="chevron-right"></i>
                         </button>
                     `;
                 }).join("")}
+
             </div>
         </div>
     `;
@@ -828,7 +1015,14 @@ function abrirDetalleCategoria(categoria, elemento) {
             });
         });
 
+    modalCategoria.style.zIndex = "1002";
+
+    if (modalFicha && !modalFicha.hidden) {
+        modalFicha.style.zIndex = "1001";
+    }
+
     modalCategoria.hidden = false;
+
     actualizarEstadoModales();
     refrescarIconos();
 
@@ -839,12 +1033,20 @@ function cerrarDetalleCategoria() {
     if (!modalCategoria) return;
 
     modalCategoria.hidden = true;
+    modalCategoria.style.removeProperty("z-index");
+
     categoriaAbierta = null;
+
+    if (modalFicha) {
+        modalFicha.style.removeProperty("z-index");
+    }
+
     actualizarEstadoModales();
 
     if (elementoQueAbrioCategoria && elementoQueAbrioCategoria.isConnected) {
         elementoQueAbrioCategoria.focus();
     }
+
     elementoQueAbrioCategoria = null;
 }
 
@@ -860,30 +1062,62 @@ if (modalCategoria) {
 
 
 // =========================================
-// 10. CARGA ÚNICA DESDE SUPABASE
+// 10. CARGA Y ACTUALIZACIÓN DESDE SUPABASE
 // =========================================
 
-async function cargarParticipantesPublicos() {
+async function cargarParticipantesPublicos(opciones = {}) {
+    const actualizacionManual = opciones.actualizacionManual === true;
+
+    if (cargandoParticipantes) return false;
+
+    cargandoParticipantes = true;
+
+    const habiaDatos = participantesPublicos.length > 0;
+
+    if (botonActualizarParticipantes) {
+        botonActualizarParticipantes.disabled = true;
+        botonActualizarParticipantes.innerHTML = `
+            <i data-lucide="refresh-cw"></i>
+            Actualizando...
+        `;
+    }
+
     const estado = esPaginaListado ? estadoListado : estadoCategorias;
-    const cantidad = esPaginaListado ? cantidadParticipantes : cantidadCategorias;
-    const tabla = contenedorTabla;
+    const cantidad = esPaginaListado
+        ? cantidadParticipantes
+        : cantidadCategorias;
+
+    if (estado) {
+        estado.classList.remove("error");
+
+        if (!actualizacionManual || !habiaDatos) {
+            estado.hidden = false;
+            estado.textContent = "Cargando participantes...";
+        } else {
+            estado.hidden = false;
+            estado.textContent = "Actualizando participantes...";
+        }
+    }
+
+    if (cantidad && (!actualizacionManual || !habiaDatos)) {
+        cantidad.textContent = "Cargando participantes...";
+    }
+
+    if (contenedorTabla && (!actualizacionManual || !habiaDatos)) {
+        contenedorTabla.hidden = true;
+    }
 
     try {
-        if (estado) {
-            estado.hidden = false;
-            estado.classList.remove("error");
-            estado.textContent = "Cargando participantes...";
-        }
-        if (cantidad) cantidad.textContent = "Cargando participantes...";
-        if (tabla) tabla.hidden = true;
-
-        const { data, error } = await supabaseClient.rpc(
-            "listar_inscripciones_publicas"
+        // La versión v2 devuelve el ID único de cada inscripción.
+        // La consulta se pagina hasta recuperar todos los registros.
+        const data = await consultarTodasLasFilasRPC(
+            "listar_inscripciones_publicas_v2",
+            500
         );
 
-        if (error) throw error;
+        participantesPublicos = quitarParticipantesDuplicados(data);
 
-        participantesPublicos = quitarParticipantesDuplicados(data || []);
+        categoriasPublicas = generarCategoriasPublicas(participantesPublicos);
 
         if (esPaginaListado) {
             cargarFiltroProfesores();
@@ -891,83 +1125,100 @@ async function cargarParticipantesPublicos() {
         }
 
         if (esPaginaCategorias) {
-            categoriasPublicas = generarCategoriasPublicas(participantesPublicos);
             dibujarCategorias();
         }
 
         return true;
+
     } catch (error) {
         console.error("Error al cargar participantes:", error);
 
+        if (habiaDatos) {
+            if (esPaginaListado && estadoListado) {
+                estadoListado.hidden = false;
+                estadoListado.classList.add("error");
+                estadoListado.textContent =
+                    "No se pudo actualizar. Se mantienen los datos anteriores.";
+            }
+
+            if (esPaginaCategorias && estadoCategorias) {
+                estadoCategorias.hidden = false;
+                estadoCategorias.classList.add("error");
+                estadoCategorias.textContent =
+                    "No se pudieron actualizar las categorías. Se mantienen los datos anteriores.";
+            }
+
+            return false;
+        }
+
         participantesPublicos = [];
+        categoriasPublicas = [];
 
         if (esPaginaListado) {
             if (cuerpoTabla) cuerpoTabla.replaceChildren();
             if (contenedorTabla) contenedorTabla.hidden = true;
+
             if (estadoListado) {
                 estadoListado.hidden = false;
                 estadoListado.classList.add("error");
                 estadoListado.textContent =
                     "No se pudieron cargar los participantes. Intentá nuevamente.";
             }
+
             if (cantidadParticipantes) {
                 cantidadParticipantes.textContent = "Error al cargar el listado";
             }
         }
 
         if (esPaginaCategorias) {
-            categoriasPublicas = [];
             if (estadoCategorias) {
                 estadoCategorias.hidden = false;
                 estadoCategorias.classList.add("error");
                 estadoCategorias.textContent =
                     "No se pudieron cargar las categorías. Intentá nuevamente.";
             }
+
             if (cantidadCategorias) {
                 cantidadCategorias.textContent = "Error al cargar las categorías";
             }
         }
 
         return false;
+
+    } finally {
+        cargandoParticipantes = false;
+
+        if (botonActualizarParticipantes) {
+            botonActualizarParticipantes.disabled = false;
+            botonActualizarParticipantes.innerHTML = `
+                <i data-lucide="refresh-cw"></i>
+                Actualizar
+            `;
+        }
+
+        refrescarIconos();
     }
 }
 
+if (botonActualizarParticipantes) {
+    botonActualizarParticipantes.addEventListener("click", () => {
+        cargarParticipantesPublicos({
+            actualizacionManual: true
+        });
+    });
+}
 
 // =========================================
-// 11. NAVEGACIÓN Y CIERRE CON ESCAPE
+// BOTÓN VOLVER - PARTICIPANTE
 // =========================================
 
 const botonVolver = document.getElementById("btn-volver");
 
 if (botonVolver) {
     botonVolver.addEventListener("click", () => {
-        if (esPaginaCategorias) {
-            window.location.href = "../index.html#pantalla-participante";
-            return;
-        }
-
-        const parametros = new URLSearchParams(window.location.search);
-        const origen = parametros.get("origen");
-
-        window.location.href = origen
-            ? `../index.html#${encodeURIComponent(origen)}`
-            : "../index.html";
+        window.location.href = "../index.html#pantalla-participante";
     });
 }
-
-document.addEventListener("keydown", evento => {
-    if (evento.key !== "Escape") return;
-
-    if (modalFicha && !modalFicha.hidden) {
-        cerrarFichaParticipante();
-        return;
-    }
-
-    if (modalCategoria && !modalCategoria.hidden) {
-        cerrarDetalleCategoria();
-    }
-});
-
 
 // =========================================
 // 12. INICIO

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,231 +15,448 @@
 </head>
 <body>
 <main id="app">
-    <header class="encabezado">
-        <a class="marca" href="#" id="marca-inicio" aria-label="Volver al inicio">
-            <span class="marca-icono"><i data-lucide="trophy"></i></span>
-            <span class="marca-texto">
-                <strong>Torneo · General San Martín</strong>
-                <span>PLATAFORMA DE COMPETICIÓN</span>
-            </span>
-        </a>
+
+<header class="encabezado">
+    <a class="marca" href="#" id="marca-inicio" aria-label="Volver al inicio">
+        <span class="marca-icono"><i data-lucide="trophy"></i></span>
+        <span class="marca-texto">
+            <strong>Torneo · General San Martín</strong>
+            <span>PLATAFORMA DE COMPETICIÓN</span>
+        </span>
+    </a>
+
+    <div class="encabezado-acciones">
+
+        <div id="barra-notificaciones-profesor" class="barra-notificaciones-privada" hidden>
+            <div class="contenedor-notificaciones">
+                <button id="btn-notificaciones-profesor"
+                        class="boton-notificaciones"
+                        type="button"
+                        aria-label="Abrir notificaciones"
+                        title="Notificaciones"
+                        aria-expanded="false">
+                    <i data-lucide="bell"></i>
+                    <span id="contador-notificaciones-profesor"
+                          class="contador-notificaciones"
+                          hidden>0</span>
+                </button>
+
+                <div id="panel-notificaciones-profesor"
+                     class="panel-notificaciones"
+                     hidden>
+                    <div class="contenido-notificaciones">
+                        <div class="resumen-notificaciones">
+                            <strong>Notificaciones</strong>
+                            <span id="resumen-notificaciones-profesor">Cargando...</span>
+                        </div>
+                        <div id="estado-notificaciones-profesor"
+                             class="estado-notificaciones"></div>
+                        <div id="lista-notificaciones-profesor"
+                             class="lista-notificaciones"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="barra-notificaciones-organizador" class="barra-notificaciones-privada" hidden>
+            <div class="contenedor-notificaciones">
+                <button id="btn-notificaciones-organizador"
+                        class="boton-notificaciones"
+                        type="button"
+                        aria-label="Abrir notificaciones"
+                        title="Notificaciones"
+                        aria-expanded="false">
+                    <i data-lucide="bell"></i>
+                    <span id="contador-notificaciones-organizador"
+                          class="contador-notificaciones"
+                          hidden>0</span>
+                </button>
+
+                <div id="panel-notificaciones-organizador"
+                     class="panel-notificaciones"
+                     hidden>
+                    <div class="contenido-notificaciones">
+                        <div class="resumen-notificaciones">
+                            <strong>Notificaciones</strong>
+                            <span id="resumen-notificaciones-organizador">Cargando...</span>
+                        </div>
+                        <div id="estado-notificaciones-organizador"
+                             class="estado-notificaciones"></div>
+                        <div id="lista-notificaciones-organizador"
+                             class="lista-notificaciones"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <button id="btn-tema" class="boton-tema" type="button"
                 aria-label="Cambiar a tema claro" title="Cambiar tema">
             <i data-lucide="sun"></i>
         </button>
-    </header>
 
-    <!-- INICIO -->
-    <section id="pantalla-inicio" class="pantalla activa pantalla-inicio">
-        <div class="portada">
-            <div class="portada-contenido">
-                <span class="etiqueta-portada"><span class="punto"></span> SISTEMA DE TORNEOS</span>
-                <h1>EL ESPÍRITU<br>DE LA <span>COMPETICIÓN.</span></h1>
-                <p>Toda la información de tu torneo de General San Martín en un solo lugar.</p>
-                <div class="linea-decorativa"></div>
-            </div>
-            <div class="portada-decoracion" aria-hidden="true">
-                <i data-lucide="trophy"></i>
-                <span>General San Martín</span>
+    </div>
+</header>
+
+<!-- INICIO -->
+<section id="pantalla-inicio" class="pantalla activa pantalla-inicio">
+    <div class="portada">
+        <div class="portada-contenido">
+            <span class="etiqueta-portada"><span class="punto"></span> SISTEMA DE TORNEOS</span>
+            <h1>EL ESPÍRITU<br>DE LA <span>COMPETICIÓN.</span></h1>
+            <p>Toda la información de tu torneo de General San Martín en un solo lugar.</p>
+            <div class="linea-decorativa"></div>
+        </div>
+        <div class="portada-decoracion" aria-hidden="true">
+            <i data-lucide="trophy"></i>
+            <span>General San Martín</span>
+        </div>
+    </div>
+
+    <div class="selector-rol">
+        <div class="titulo-seccion">
+            <div>
+                <h2>¿Cómo querés ingresar?</h2>
+                <p>Seleccioná tu perfil para continuar</p>
             </div>
         </div>
 
-        <div class="selector-rol">
-            <div class="titulo-seccion">
-                <div>
-                    <h2>¿Cómo querés ingresar?</h2>
-                    <p>Seleccioná tu perfil para continuar</p>
-                </div>
-            </div>
+        <div class="opciones opciones-roles">
+            <button class="boton-rol" id="btn-espectador" type="button">
+                <span class="icono-rol"><i data-lucide="eye"></i></span>
+                <span class="texto-rol">
+                    <strong>Espectador</strong>
+                    <small>Consultá la información pública del torneo</small>
+                </span>
+                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+            </button>
 
-            <div class="opciones opciones-roles">
-                <button class="boton-rol" id="btn-participante" type="button">
-                    <span class="icono-rol"><i data-lucide="user-round"></i></span>
-                    <span class="texto-rol"><strong>Participante</strong><small>Consultá la información del torneo</small></span>
-                    <i data-lucide="arrow-up-right" class="flecha-rol"></i>
-                </button>
-                <button class="boton-rol" id="btn-profesor" type="button">
-                    <span class="icono-rol"><i data-lucide="users-round"></i></span>
-                    <span class="texto-rol"><strong>Profesor</strong><small>Gestioná tus alumnos e inscripciones</small></span>
-                    <i data-lucide="arrow-up-right" class="flecha-rol"></i>
-                </button>
-                <button class="boton-rol" id="btn-organizador" type="button">
-                    <span class="icono-rol"><i data-lucide="shield-check"></i></span>
-                    <span class="texto-rol"><strong>Organizador</strong><small>Administrá las áreas del torneo</small></span>
-                    <i data-lucide="arrow-up-right" class="flecha-rol"></i>
-                </button>
-            </div>
-        </div>
-    </section>
+            <button class="boton-rol" id="btn-participante" type="button">
+                <span class="icono-rol"><i data-lucide="user-round"></i></span>
+                <span class="texto-rol">
+                    <strong>Participante</strong>
+                    <small>Consultá tu información y la competición</small>
+                </span>
+                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+            </button>
 
-    <!-- PARTICIPANTE -->
-    <section id="pantalla-participante" class="pantalla">
-        <div class="encabezado-pantalla">
-            <span class="etiqueta-portada">ÁREA PÚBLICA</span>
-            <h1>Participantes</h1>
-            <p>Consultá la información del torneo o realizá tu inscripción.</p>
-        </div>
-
-        <div class="opciones opciones-listado">
-            <button class="boton-rol" type="button" id="btn-ver-participantes">
+            <button class="boton-rol" id="btn-profesor" type="button">
                 <span class="icono-rol"><i data-lucide="users-round"></i></span>
-                <span class="texto-rol"><strong>Ver participantes</strong><small>Consultá la lista de competidores</small></span>
+                <span class="texto-rol">
+                    <strong>Profesor</strong>
+                    <small>Gestioná tus alumnos e inscripciones</small>
+                </span>
                 <i data-lucide="arrow-up-right" class="flecha-rol"></i>
             </button>
-<button class="boton-rol" type="button" id="btn-ver-categorias">
-    <span class="icono-rol"><i data-lucide="layers"></i></span>
-    <span class="texto-rol">
-        <strong>Ver categorías</strong>
-        <small>Explorá las agrupaciones del torneo</small>
-    </span>
-    <i data-lucide="arrow-up-right" class="flecha-rol"></i>
-</button>
-            <button class="boton-rol" type="button" data-destino-provisional>
-                <span class="icono-rol"><i data-lucide="git-branch"></i></span>
-                <span class="texto-rol"><strong>Ver llaves</strong><small>Consultá los cuadros de competencia</small></span>
-                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
-            </button>
-        </div>
 
-        <div class="grupo-opciones grupo-acciones">
-            <button class="boton-rol" type="button">
-                <span class="icono-rol"><i data-lucide="user-plus"></i></span>
-                <span class="texto-rol"><strong>Inscribirme</strong><small>Próximamente</small></span>
+            <button class="boton-rol" id="btn-organizador" type="button">
+                <span class="icono-rol"><i data-lucide="shield-check"></i></span>
+                <span class="texto-rol">
+                    <strong>Organizador</strong>
+                    <small>Administrá las áreas del torneo</small>
+                </span>
                 <i data-lucide="arrow-up-right" class="flecha-rol"></i>
             </button>
         </div>
+    </div>
+</section>
 
-        <button class="btn-volver" type="button" data-volver><i data-lucide="arrow-left"></i> Volver al inicio</button>
-    </section>
+<!-- ESPECTADOR -->
+<section id="pantalla-espectador" class="pantalla">
+    <div class="encabezado-pantalla">
+        <span class="etiqueta-portada">ÁREA PÚBLICA</span>
+        <h1>Espectadores</h1>
+        <p>Seguí el desarrollo del torneo y consultá su información.</p>
+    </div>
 
-    <!-- LOGIN PROFESOR -->
-    <section id="pantalla-login-profesor" class="pantalla">
-        <div class="encabezado-pantalla">
-            <span class="etiqueta-portada">ACCESO PRIVADO</span>
-            <h1>Área de profesores</h1>
-            <p>Iniciá sesión para gestionar tus alumnos.</p>
+    <div class="opciones opciones-listado">
+        <button class="boton-rol" type="button" data-ruta="espectador/listado.html">
+            <span class="icono-rol"><i data-lucide="users-round"></i></span>
+            <span class="texto-rol">
+                <strong>Ver participantes</strong>
+                <small>Consultá la lista de competidores</small>
+            </span>
+            <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+        </button>
+
+        <button class="boton-rol" type="button" data-ruta="espectador/categorias.html">
+            <span class="icono-rol"><i data-lucide="layers"></i></span>
+            <span class="texto-rol">
+                <strong>Ver categorías</strong>
+                <small>Explorá las agrupaciones del torneo</small>
+            </span>
+            <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+        </button>
+
+        <button class="boton-rol" type="button" data-ruta="espectador/llamados.html">
+            <span class="icono-rol"><i data-lucide="megaphone"></i></span>
+            <span class="texto-rol">
+                <strong>Ver llamados</strong>
+                <small>Consultá los llamados a competencia</small>
+            </span>
+            <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+        </button>
+    </div>
+
+    <button class="btn-volver" type="button" data-volver>
+        <i data-lucide="arrow-left"></i> Volver al inicio
+    </button>
+</section>
+
+<!-- PARTICIPANTE -->
+<section id="pantalla-participante" class="pantalla">
+    <div class="encabezado-pantalla">
+        <span class="etiqueta-portada">ÁREA DE PARTICIPANTES</span>
+        <h1>Participantes</h1>
+        <p>Consultá la información del torneo y sus competencias.</p>
+    </div>
+
+    <div class="opciones opciones-listado">
+        <button class="boton-rol" type="button" data-ruta="participantes/listado.html">
+            <span class="icono-rol"><i data-lucide="users-round"></i></span>
+            <span class="texto-rol"><strong>Ver participantes</strong><small>Consultá la lista de competidores</small></span>
+            <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+        </button>
+
+        <button class="boton-rol" type="button" data-ruta="participantes/categorias.html">
+            <span class="icono-rol"><i data-lucide="layers"></i></span>
+            <span class="texto-rol"><strong>Ver categorías</strong><small>Explorá las agrupaciones del torneo</small></span>
+            <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+        </button>
+
+        <button class="boton-rol" type="button" data-ruta="participantes/llaves.html">
+            <span class="icono-rol"><i data-lucide="git-branch"></i></span>
+            <span class="texto-rol"><strong>Ver llaves</strong><small>Consultá los cuadros de competencia</small></span>
+            <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+        </button>
+
+        <button class="boton-rol" type="button" data-ruta="participantes/llamados.html">
+            <span class="icono-rol"><i data-lucide="megaphone"></i></span>
+            <span class="texto-rol"><strong>Ver llamados</strong><small>Consultá los llamados a competencia</small></span>
+            <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+        </button>
+    </div>
+
+    <div class="grupo-opciones grupo-acciones">
+        <button class="boton-rol" type="button">
+            <span class="icono-rol"><i data-lucide="user-plus"></i></span>
+            <span class="texto-rol"><strong>Inscribirme</strong><small>Próximamente</small></span>
+            <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+        </button>
+    </div>
+
+    <button class="btn-volver" type="button" data-volver>
+        <i data-lucide="arrow-left"></i> Volver al inicio
+    </button>
+</section>
+
+<!-- LOGIN PROFESOR -->
+<section id="pantalla-login-profesor" class="pantalla">
+    <div class="encabezado-pantalla">
+        <span class="etiqueta-portada">ACCESO PRIVADO</span>
+        <h1>Área de profesores</h1>
+        <p>Iniciá sesión para gestionar tus alumnos.</p>
+    </div>
+
+    <form id="form-profesor" class="formulario-login">
+        <label for="usuario-profesor">Usuario</label>
+        <div class="campo-login">
+            <i data-lucide="user"></i>
+            <input type="text" id="usuario-profesor" placeholder="Ingresá tu usuario" autocomplete="username" required>
         </div>
 
-        <form id="form-profesor" class="formulario-login">
-            <label for="usuario-profesor">Usuario</label>
-            <div class="campo-login"><i data-lucide="user"></i><input type="text" id="usuario-profesor" placeholder="Ingresá tu usuario" autocomplete="username" required></div>
-            <label for="password-profesor">Contraseña</label>
-            <div class="campo-login"><i data-lucide="lock"></i><input type="password" id="password-profesor" placeholder="Ingresá tu contraseña" autocomplete="current-password" required></div>
-            <button type="submit" class="boton-principal">Iniciar sesión <i data-lucide="arrow-right"></i></button>
-            <p id="mensaje-profesor" class="mensaje-login" role="status" aria-live="polite"></p>
-        </form>
-        <button class="btn-volver" type="button" data-volver><i data-lucide="arrow-left"></i> Volver</button>
-    </section>
-
-    <!-- MENÚ PROFESOR -->
-    <section id="pantalla-menu-profesor" class="pantalla">
-        <div class="encabezado-pantalla">
-            <span class="etiqueta-portada">PANEL PRIVADO</span>
-            <h1>Panel del profesor</h1>
-            <p id="saludo-profesor">Seleccioná qué querés hacer.</p>
+        <label for="password-profesor">Contraseña</label>
+        <div class="campo-login">
+            <i data-lucide="lock"></i>
+            <input type="password" id="password-profesor" placeholder="Ingresá tu contraseña" autocomplete="current-password" required>
         </div>
 
-        <div class="opciones opciones-listado">
-            <button class="boton-rol" type="button" data-destino-provisional>
-                <span class="icono-rol"><i data-lucide="users-round"></i></span>
-                <span class="texto-rol"><strong>Ver participantes</strong><small>Consultá las inscripciones del torneo</small></span>
-                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
-            </button>
-            <button class="boton-rol" type="button" data-destino-provisional>
-                <span class="icono-rol"><i data-lucide="layers"></i></span>
-                <span class="texto-rol"><strong>Ver categorías</strong><small>Consultá las agrupaciones del torneo</small></span>
-                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
-            </button>
-            <button class="boton-rol" type="button" data-destino-provisional>
-                <span class="icono-rol"><i data-lucide="git-branch"></i></span>
-                <span class="texto-rol"><strong>Ver llaves</strong><small>Consultá los cuadros de competencia</small></span>
-                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+        <button type="submit" class="boton-principal">
+            Iniciar sesión <i data-lucide="arrow-right"></i>
+        </button>
+        <p id="mensaje-profesor" class="mensaje-login" role="status" aria-live="polite"></p>
+    </form>
+
+    <button class="btn-volver" type="button" data-volver>
+        <i data-lucide="arrow-left"></i> Volver
+    </button>
+</section>
+
+<!-- MENÚ PROFESOR -->
+<section id="pantalla-menu-profesor" class="pantalla">
+    <div class="encabezado-pantalla">
+        <span class="etiqueta-portada">PANEL PRIVADO</span>
+        <h1>Panel del profesor</h1>
+        <p id="saludo-profesor">Seleccioná qué querés hacer.</p>
+    </div>
+
+    <div class="opciones opciones-listado">
+        <button class="boton-rol" type="button" data-ruta="profesor/listado.html">
+            <span class="icono-rol"><i data-lucide="users-round"></i></span>
+            <span class="texto-rol"><strong>Ver participantes</strong><small>Consultá las inscripciones del torneo</small></span>
+            <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+        </button>
+
+        <button class="boton-rol" type="button" data-ruta="profesor/categorias.html">
+            <span class="icono-rol"><i data-lucide="layers"></i></span>
+            <span class="texto-rol"><strong>Ver categorías</strong><small>Consultá las agrupaciones del torneo</small></span>
+            <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+        </button>
+
+        <button class="boton-rol" type="button" data-ruta="participantes/llaves.html">
+            <span class="icono-rol"><i data-lucide="git-branch"></i></span>
+            <span class="texto-rol"><strong>Ver llaves</strong><small>Consultá los cuadros de competencia</small></span>
+            <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+        </button>
+
+        <button class="boton-rol" type="button" data-ruta="participantes/llamados.html">
+            <span class="icono-rol"><i data-lucide="megaphone"></i></span>
+            <span class="texto-rol"><strong>Ver llamados</strong><small>Consultá los llamados a competencia</small></span>
+            <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+        </button>
+    </div>
+
+    <div class="grupo-opciones grupo-acciones">
+        <button class="boton-rol" type="button">
+            <span class="icono-rol"><i data-lucide="user-plus"></i></span>
+            <span class="texto-rol"><strong>Inscribirme</strong><small>Registrá tu participación</small></span>
+            <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+        </button>
+
+        <button class="boton-rol" type="button">
+            <span class="icono-rol"><i data-lucide="clipboard-pen-line"></i></span>
+            <span class="texto-rol"><strong>Inscribir a mis alumnos</strong><small>Registrá alumnos de tu escuela</small></span>
+            <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+        </button>
+    </div>
+
+    <button class="btn-volver" type="button" data-volver>
+        <i data-lucide="arrow-left"></i> Volver
+    </button>
+</section>
+
+<!-- LOGIN ORGANIZADOR -->
+<section id="pantalla-login-organizador" class="pantalla">
+    <div class="encabezado-pantalla">
+        <span class="etiqueta-portada">ACCESO ADMINISTRATIVO</span>
+        <h1>Área de organización</h1>
+        <p>Ingresá con tu cuenta de organizador.</p>
+    </div>
+
+    <form id="form-organizador" class="formulario-login">
+        <label for="usuario-organizador">Usuario</label>
+        <div class="campo-login">
+            <i data-lucide="user"></i>
+            <input type="text" id="usuario-organizador" placeholder="Ingresá tu usuario" autocomplete="username" required>
+        </div>
+
+        <label for="password-organizador">Contraseña</label>
+        <div class="campo-login">
+            <i data-lucide="lock"></i>
+            <input type="password" id="password-organizador" placeholder="Ingresá tu contraseña" autocomplete="current-password" required>
+        </div>
+
+        <button type="submit" class="boton-principal">
+            Iniciar sesión <i data-lucide="arrow-right"></i>
+        </button>
+        <p id="mensaje-organizador" class="mensaje-login" role="status" aria-live="polite"></p>
+    </form>
+
+    <button class="btn-volver" type="button" data-volver>
+        <i data-lucide="arrow-left"></i> Volver
+    </button>
+</section>
+
+<!-- MENÚ ORGANIZADOR -->
+<section id="pantalla-menu-organizador" class="pantalla">
+    <div class="encabezado-pantalla">
+        <span class="etiqueta-portada">PANEL ADMINISTRATIVO</span>
+        <h1>Organización</h1>
+        <p id="saludo-organizador">Administrá las distintas áreas del torneo.</p>
+    </div>
+
+    <div class="opciones opciones-listado">
+        <button class="boton-rol" type="button" data-ruta="organizador/listado.html">
+            <span class="icono-rol"><i data-lucide="users-round"></i></span>
+            <span class="texto-rol"><strong>Ver participantes</strong><small>Consultá las inscripciones del torneo</small></span>
+            <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+        </button>
+
+        <button class="boton-rol" type="button" data-ruta="organizador/categorias.html">
+            <span class="icono-rol"><i data-lucide="layers"></i></span>
+            <span class="texto-rol"><strong>Ver categorías</strong><small>Consultá las agrupaciones del torneo</small></span>
+            <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+        </button>
+
+        <button class="boton-rol" type="button" data-ruta="organizador/llaves.html">
+            <span class="icono-rol"><i data-lucide="git-branch"></i></span>
+            <span class="texto-rol"><strong>Ver llaves</strong><small>Consultá los cuadros de competencia</small></span>
+            <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+        </button>
+
+        <button class="boton-rol" type="button" data-ruta="organizador/llamados.html">
+            <span class="icono-rol"><i data-lucide="megaphone"></i></span>
+            <span class="texto-rol"><strong>Ver llamados</strong><small>Administrá los llamados a competencia</small></span>
+            <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+        </button>
+    </div>
+
+    <div class="grupo-opciones grupo-configuracion">
+        <button class="boton-rol" type="button">
+            <span class="icono-rol"><i data-lucide="settings"></i></span>
+            <span class="texto-rol"><strong>Configuración</strong><small>Administración y ajustes del torneo</small></span>
+            <i data-lucide="arrow-up-right" class="flecha-rol"></i>
+        </button>
+    </div>
+
+    <button class="btn-volver" type="button" data-volver>
+        <i data-lucide="arrow-left"></i> Volver
+    </button>
+</section>
+
+<!-- DETALLE DE NOTIFICACIÓN -->
+<div id="modal-detalle-notificacion"
+     class="modal-ficha modal-detalle-notificacion"
+     hidden
+     role="presentation">
+
+    <div class="modal-ficha-contenedor"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="titulo-detalle-notificacion">
+
+        <div class="modal-ficha-barra">
+            <div>
+                <span class="etiqueta-portada">DETALLE</span>
+                <h2 id="titulo-detalle-notificacion">Notificación</h2>
+            </div>
+
+            <button id="btn-cerrar-detalle-notificacion"
+                    class="modal-ficha-cerrar"
+                    type="button"
+                    aria-label="Cerrar detalle">
+                <i data-lucide="x"></i>
             </button>
         </div>
 
-        <div class="grupo-opciones grupo-acciones">
-            <button class="boton-rol" type="button">
-                <span class="icono-rol"><i data-lucide="user-plus"></i></span>
-                <span class="texto-rol"><strong>Inscribirme</strong><small>Registrá tu participación</small></span>
-                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
-            </button>
-            <button class="boton-rol" type="button">
-                <span class="icono-rol"><i data-lucide="clipboard-pen-line"></i></span>
-                <span class="texto-rol"><strong>Inscribir a mis alumnos</strong><small>Registrá alumnos de tu escuela</small></span>
-                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
-            </button>
+        <div class="contenido-detalle-notificacion">
+            <div id="detalle-notificacion-tipo" class="detalle-notificacion-tipo"></div>
+            <p id="detalle-notificacion-mensaje" class="detalle-notificacion-mensaje"></p>
+            <div id="detalle-notificacion-datos" class="detalle-notificacion-datos"></div>
+
+            <div class="detalle-notificacion-acciones">
+                <button id="btn-volver-notificaciones" type="button">
+                    Volver a notificaciones
+                </button>
+            </div>
         </div>
-        <button class="btn-volver" type="button" data-volver><i data-lucide="arrow-left"></i> Volver</button>
-    </section>
+    </div>
+</div>
 
-    <!-- LOGIN ORGANIZADOR -->
-    <section id="pantalla-login-organizador" class="pantalla">
-        <div class="encabezado-pantalla">
-            <span class="etiqueta-portada">ACCESO ADMINISTRATIVO</span>
-            <h1>Área de organización</h1>
-            <p>Ingresá con tu cuenta de organizador.</p>
-        </div>
+<footer class="pie-pagina">
+    <span>General San Martín</span>
+    <span>TAEKWONDO</span>
+</footer>
 
-        <form id="form-organizador" class="formulario-login">
-            <label for="usuario-organizador">Usuario</label>
-            <div class="campo-login"><i data-lucide="user"></i><input type="text" id="usuario-organizador" placeholder="Ingresá tu usuario" autocomplete="username" required></div>
-            <label for="password-organizador">Contraseña</label>
-            <div class="campo-login"><i data-lucide="lock"></i><input type="password" id="password-organizador" placeholder="Ingresá tu contraseña" autocomplete="current-password" required></div>
-            <button type="submit" class="boton-principal">Iniciar sesión <i data-lucide="arrow-right"></i></button>
-            <p id="mensaje-organizador" class="mensaje-login" role="status" aria-live="polite"></p>
-        </form>
-        <button class="btn-volver" type="button" data-volver><i data-lucide="arrow-left"></i> Volver</button>
-    </section>
-
-    <!-- MENÚ ORGANIZADOR -->
-    <section id="pantalla-menu-organizador" class="pantalla">
-        <div class="encabezado-pantalla">
-            <span class="etiqueta-portada">PANEL ADMINISTRATIVO</span>
-            <h1>Organización</h1>
-            <p id="saludo-organizador">Administrá las distintas áreas del torneo.</p>
-        </div>
-
-        <div class="opciones opciones-listado">
-            <button class="boton-rol" type="button" data-destino-provisional>
-                <span class="icono-rol"><i data-lucide="users-round"></i></span>
-                <span class="texto-rol"><strong>Ver participantes</strong><small>Consultá las inscripciones del torneo</small></span>
-                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
-            </button>
-            <button class="boton-rol" type="button" data-destino-provisional>
-                <span class="icono-rol"><i data-lucide="layers"></i></span>
-                <span class="texto-rol"><strong>Ver categorías</strong><small>Consultá las agrupaciones del torneo</small></span>
-                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
-            </button>
-            <button class="boton-rol" type="button" data-destino-provisional>
-                <span class="icono-rol"><i data-lucide="git-branch"></i></span>
-                <span class="texto-rol"><strong>Ver llaves</strong><small>Consultá los cuadros de competencia</small></span>
-                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
-            </button>
-        </div>
-
-        <div class="grupo-opciones grupo-acciones">
-            <button class="boton-rol" type="button">
-                <span class="icono-rol"><i data-lucide="clipboard-pen-line"></i></span>
-                <span class="texto-rol"><strong>Inscribir a mis alumnos</strong><small>Registrar participantes en el torneo</small></span>
-                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
-            </button>
-        </div>
-
-        <div class="grupo-opciones grupo-configuracion">
-            <button class="boton-rol" type="button">
-                <span class="icono-rol"><i data-lucide="settings"></i></span>
-                <span class="texto-rol"><strong>Configuración</strong><small>Administración y ajustes del torneo</small></span>
-                <i data-lucide="arrow-up-right" class="flecha-rol"></i>
-            </button>
-        </div>
-        <button class="btn-volver" type="button" data-volver><i data-lucide="arrow-left"></i> Volver</button>
-    </section>
-
-    <footer class="pie-pagina">
-        <span>General San Martín</span>
-        <span>TAEKWONDO</span>
-    </footer>
 </main>
 
 <script src="https://unpkg.com/lucide@latest"></script>

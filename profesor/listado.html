@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111111">
+
+    <title>Participantes · Zona de profesores</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div id="app">
+
+
+
+<header class="encabezado">
+
+    <a class="marca" href="../" aria-label="Volver al inicio">
+        <div class="marca-icono">
+            <i data-lucide="trophy"></i>
+        </div>
+
+        <div class="marca-texto">
+            <strong>Torneo · General San Martín</strong>
+            <span>ZONA PRIVADA DE PROFESORES</span>
+        </div>
+    </a>
+
+    <div class="encabezado-acciones">
+
+        <div class="contenedor-notificaciones">
+
+            <button
+                id="btn-notificaciones"
+                class="boton-notificaciones"
+                type="button"
+                aria-label="Abrir notificaciones"
+                title="Notificaciones"
+            >
+                <i data-lucide="bell"></i>
+                <span id="contador-notificaciones"
+                      class="contador-notificaciones"
+                      hidden>0</span>
+            </button>
+
+            <!-- CAJA DESPLEGABLE -->
+            <div id="panel-notificaciones" class="panel-notificaciones" hidden>
+
+                <div class="contenido-notificaciones">
+
+                    <div class="resumen-notificaciones">
+                        <strong>Notificaciones</strong>
+                        <span id="resumen-notificaciones">Cargando...</span>
+                    </div>
+
+                    <div id="estado-notificaciones"
+                         class="estado-notificaciones">
+                        Cargando notificaciones...
+                    </div>
+
+                    <div id="lista-notificaciones"
+                         class="lista-notificaciones">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <button
+            id="btn-tema"
+            class="boton-tema"
+            type="button"
+            aria-label="Cambiar tema"
+            title="Cambiar tema"
+        >
+            <i data-lucide="sun"></i>
+        </button>
+
+    </div>
+
+</header>
+
+
+
+        <main>
+
+            <section id="pantalla-listado-profesores" class="pantalla activa">
+
+                <div class="encabezado-pantalla">
+                    <h1>Participantes</h1>
+                    <p>Listado general de competidores inscriptos.</p>
+                </div>
+
+                <button class="btn-volver" id="btn-volver" type="button">
+                    <i data-lucide="arrow-left"></i>
+                    Volver
+                </button>
+
+                <div class="panel-listado">
+
+                    <div class="herramientas-listado">
+
+                        <div class="campo-buscador">
+                            <i data-lucide="search"></i>
+
+                            <input
+                                type="search"
+                                id="buscar-participante"
+                                placeholder="Buscar por nombre o apellido..."
+                                autocomplete="off"
+                                aria-label="Buscar participante"
+                            >
+                        </div>
+
+                        <div class="filtros-listado">
+
+                            <select
+                                id="filtro-profesor"
+                                aria-label="Filtrar por profesor"
+                            >
+                                <option value="">Todos los profesores</option>
+                            </select>
+
+                            <button
+                                id="btn-actualizar-participantes"
+                                class="boton-ficha-secundario"
+                                type="button"
+                                title="Actualizar listado"
+                            >
+                                <i data-lucide="refresh-cw"></i>
+                                Actualizar
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="resumen-listado">
+                        <span id="cantidad-participantes">
+                            Verificando acceso...
+                        </span>
+                    </div>
+
+                    <div
+                        id="estado-listado"
+                        class="estado-listado"
+                        role="status"
+                        aria-live="polite"
+                    >
+                        Verificando sesión...
+                    </div>
+
+                    <div
+                        id="contenedor-tabla"
+                        class="tabla-contenedor"
+                        hidden
+                    >
+
+                        <table class="tabla-participantes">
+
+                            <thead>
+                                <tr>
+                                    <th>Participante</th>
+                                    <th>Edad</th>
+                                    <th>Graduación</th>
+                                    <th>Profesor</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="cuerpo-tabla-participantes"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <footer class="pie-pagina">
+            <span>General San Martín</span>
+            <span>TAEKWONDO</span>
+        </footer>
+
+    </div>
+
+    <!-- FICHA DEL PARTICIPANTE -->
+
+    <div
+        id="modal-ficha-publica"
+        class="modal-ficha"
+        hidden
+        role="presentation"
+    >
+
+        <div
+            class="modal-ficha-contenedor"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="titulo-modal-ficha"
+        >
+
+            <div class="modal-ficha-barra">
+
+    <div>
+        <span class="etiqueta-portada">ZONA DE PROFESORES</span>
+        <h2 id="titulo-modal-ficha">Ficha del participante</h2>
+    </div>
+
+    <div class="acciones-barra-ficha">
+
+<button
+    id="btn-editar-ficha-modal"
+    class="btn-editar-ficha"
+    type="button"
+    hidden
+>
+    <i data-lucide="pencil"></i>
+    <span>Editar</span>
+</button>
+
+        <button
+            id="btn-cerrar-ficha"
+            class="modal-ficha-cerrar"
+            type="button"
+            aria-label="Cerrar ficha"
+            title="Cerrar"
+        >
+            <i data-lucide="x"></i>
+        </button>
+
+    </div>
+
+</div>
+
+            <div id="contenido-ficha-publica"></div>
+
+        </div>
+
+    </div>
+
+    <!-- MODAL DE CATEGORÍA -->
+
+    <div
+        id="modal-categoria"
+        class="modal-ficha"
+        hidden
+        role="presentation"
+    >
+
+        <div
+            class="modal-ficha-contenedor modal-categoria-contenedor"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="titulo-modal-categoria"
+        >
+
+            <div class="modal-ficha-barra">
+
+                <div>
+                    <h2 id="titulo-modal-categoria">Categoría</h2>
+                </div>
+
+                <button
+                    id="btn-cerrar-categoria"
+                    class="modal-ficha-cerrar"
+                    type="button"
+                    aria-label="Cerrar categoría"
+                    title="Cerrar"
+                >
+                    <i data-lucide="x"></i>
+                </button>
+
+            </div>
+
+            <div id="contenido-modal-categoria"></div>
+
+        </div>
+
+    </div>
+
+    <!-- MODAL DE CONFIRMACIÓN -->
+
+    <div
+        id="modal-confirmacion-edicion"
+        class="modal-ficha"
+        hidden
+        role="presentation"
+    >
+
+        <div
+            class="modal-ficha-contenedor"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="titulo-confirmacion-edicion"
+        >
+
+            <div class="modal-ficha-barra">
+
+                <div>
+                    <span class="etiqueta-portada">CONFIRMAR OPERACIÓN</span>
+                    <h2 id="titulo-confirmacion-edicion">Guardar cambios</h2>
+                </div>
+
+                <button
+                    id="btn-cerrar-confirmacion"
+                    class="modal-ficha-cerrar"
+                    type="button"
+                    aria-label="Cerrar confirmación"
+                >
+                    <i data-lucide="x"></i>
+                </button>
+
+            </div>
+
+            <div id="contenido-confirmacion-edicion"></div>
+
+        </div>
+
+    </div>
+
+
+<!-- CAJA PLEGABLE DE NOTIFICACIONES -->
+<div id="panel-notificaciones" class="panel-notificaciones" hidden>
+    <div class="contenido-notificaciones">
+
+        <div class="resumen-notificaciones">
+            <strong>Notificaciones</strong>
+            <span id="resumen-notificaciones">Cargando...</span>
+        </div>
+
+        <div id="estado-notificaciones" class="estado-notificaciones">
+            Cargando notificaciones...
+        </div>
+
+        <div id="lista-notificaciones" class="lista-notificaciones"></div>
+
+    </div>
+</div>
+
+<!-- MODAL DE DETALLE -->
+<div id="modal-detalle-notificacion"
+     class="modal-ficha modal-detalle-notificacion"
+     hidden
+     role="presentation">
+
+    <div class="modal-ficha-contenedor"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="titulo-detalle-notificacion">
+
+        <div class="modal-ficha-barra">
+            <div>
+                <span class="etiqueta-portada">DETALLE</span>
+                <h2 id="titulo-detalle-notificacion">Notificación</h2>
+            </div>
+
+            <button id="btn-cerrar-detalle-notificacion"
+                    class="modal-ficha-cerrar"
+                    type="button"
+                    aria-label="Cerrar detalle">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+
+        <div class="contenido-detalle-notificacion">
+            <div id="detalle-notificacion-tipo"
+                 class="detalle-notificacion-tipo"></div>
+
+            <p id="detalle-notificacion-mensaje"
+               class="detalle-notificacion-mensaje"></p>
+
+            <div id="detalle-notificacion-datos"
+                 class="detalle-notificacion-datos"></div>
+
+            <div class="detalle-notificacion-acciones">
+                <button id="btn-volver-notificaciones" type="button">
+                    Volver a notificaciones
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- LIBRERÍAS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- JAVASCRIPT PRIVADO -->
+
+    <script src="script.js"></script>
+
+</body>
+</html>
